@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kotlin Mastery — Complete Interview Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-kotlin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<style>
+:root{--bg:#0c0d12;--bg-grid:#14161d;--surface:#15171f;--surface-2:#1c1f29;--surface-3:#252836;--border:#2a2e3c;--border-subtle:#1f222c;--text:#e8e9ed;--text-2:#b5b9c5;--text-3:#828794;--text-4:#5a5e6b;--primary:#ff8a3d;--primary-soft:#ffb380;--secondary:#b388ff;--secondary-soft:#cdb1ff;--pop:#ff7eb6;--green:#7ee787;--blue:#79c0ff;--yellow:#ffd866;--red:#ff7b72;--warn-bg:rgba(255,123,114,0.08);--warn-border:rgba(255,123,114,0.3);--tip-bg:rgba(126,231,135,0.06);--tip-border:rgba(126,231,135,0.25);--note-bg:rgba(121,192,255,0.06);--note-border:rgba(121,192,255,0.25);--mistake-bg:rgba(255,138,61,0.06);--mistake-border:rgba(255,138,61,0.28);--def-bg:rgba(179,136,255,0.07);--def-border:rgba(179,136,255,0.3);--code-bg:#0a0b10;--code-border:#1c1f29;--shadow:0 1px 0 rgba(255,255,255,0.04) inset,0 8px 32px rgba(0,0,0,0.5);--shadow-sm:0 1px 0 rgba(255,255,255,0.03) inset,0 2px 8px rgba(0,0,0,0.3);--sidebar-w:320px;--font-display:'Fraunces',Georgia,serif;--font-body:'Geist',-apple-system,sans-serif;--font-mono:'JetBrains Mono','SF Mono',Consolas,monospace}
+[data-theme="light"]{--bg:#faf8f3;--bg-grid:#f0ede4;--surface:#ffffff;--surface-2:#f5f2ea;--surface-3:#ebe7dc;--border:#d9d4c5;--border-subtle:#e8e3d4;--text:#1a1a1f;--text-2:#3d4049;--text-3:#6b6e78;--text-4:#9c9fa8;--primary:#d65a14;--primary-soft:#b8531a;--secondary:#7c4dff;--secondary-soft:#9670ff;--pop:#d63384;--green:#1a7f37;--blue:#0969da;--yellow:#9a6700;--red:#cf222e;--warn-bg:rgba(207,34,46,0.06);--warn-border:rgba(207,34,46,0.25);--tip-bg:rgba(26,127,55,0.05);--tip-border:rgba(26,127,55,0.2);--note-bg:rgba(9,105,218,0.05);--note-border:rgba(9,105,218,0.2);--mistake-bg:rgba(214,90,20,0.05);--mistake-border:rgba(214,90,20,0.25);--def-bg:rgba(124,77,255,0.06);--def-border:rgba(124,77,255,0.25);--code-bg:#1c1f29;--code-border:#2a2e3c;--shadow:0 1px 0 rgba(255,255,255,0.6) inset,0 4px 20px rgba(0,0,0,0.06);--shadow-sm:0 1px 0 rgba(255,255,255,0.5) inset,0 1px 4px rgba(0,0,0,0.04)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:30px}body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.65;font-size:15.5px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(circle at 20% 10%,color-mix(in srgb,var(--primary) 8%,transparent),transparent 40%),radial-gradient(circle at 80% 80%,color-mix(in srgb,var(--secondary) 8%,transparent),transparent 40%),linear-gradient(var(--bg-grid) 1px,transparent 1px),linear-gradient(90deg,var(--bg-grid) 1px,transparent 1px);background-size:auto,auto,32px 32px,32px 32px;min-height:100vh}::selection{background:var(--primary);color:var(--bg)}
+.progress-bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:1000;background:transparent}.progress-bar::before{content:'';display:block;height:100%;width:var(--progress,0%);background:linear-gradient(90deg,var(--primary),var(--pop),var(--secondary));transition:width .1s ease-out}
+.layout{display:grid;grid-template-columns:var(--sidebar-w) 1fr;max-width:1500px;margin:0 auto;min-height:100vh;transition:grid-template-columns .3s cubic-bezier(.4,0,.2,1)}body.sidebar-collapsed .layout{grid-template-columns:0 1fr}
+.sidebar{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;border-right:1px solid var(--border-subtle);background:linear-gradient(180deg,var(--bg),transparent 200px);transition:opacity .3s ease,transform .3s ease}.sidebar-inner{padding:24px 28px 32px 32px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:var(--border) transparent}.sidebar-inner::-webkit-scrollbar{width:6px}.sidebar-inner::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}body.sidebar-collapsed .sidebar{opacity:0;pointer-events:none}
+.brand-row{display:flex;align-items:center;justify-content:space-between;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--border-subtle);gap:8px}.brand{display:flex;align-items:center;gap:12px;flex:1;min-width:0}.brand-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--primary),var(--pop) 50%,var(--secondary));border-radius:10px;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;color:#0c0d12;font-size:18px;font-style:italic;box-shadow:0 4px 12px color-mix(in srgb,var(--primary) 25%,transparent);flex-shrink:0}.brand-text{display:flex;flex-direction:column;min-width:0}.brand-title{font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:-.01em;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-sub{font-size:11px;color:var(--text-3);letter-spacing:.05em;text-transform:uppercase;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sidebar-toggle{width:28px;height:28px;background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--text-3);cursor:pointer;display:grid;place-items:center;transition:all .15s;flex-shrink:0}.sidebar-toggle:hover{color:var(--primary);border-color:var(--primary);background:color-mix(in srgb,var(--primary) 8%,transparent)}.sidebar-toggle svg{width:14px;height:14px}
+.search-wrap{position:relative;margin-bottom:20px}.search-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 12px 9px 34px;color:var(--text);font-family:var(--font-body);font-size:13px;outline:none;transition:border-color .15s,background .15s}.search-input:focus{border-color:var(--primary);background:var(--surface-2)}.search-input::placeholder{color:var(--text-4)}.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-4);pointer-events:none}
+.nav-label{font-family:var(--font-mono);font-size:10px;color:var(--text-4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;padding-left:12px}
+.toc{list-style:none}.toc-item{margin:1px 0}.toc-link{display:flex;align-items:baseline;gap:10px;padding:7px 10px 7px 12px;border-radius:6px;color:var(--text-2);text-decoration:none;font-size:13.5px;border-left:2px solid transparent;margin-left:-2px;transition:all .15s ease;line-height:1.4}.toc-link:hover{color:var(--text);background:var(--surface)}.toc-link.active{color:var(--primary);background:linear-gradient(90deg,color-mix(in srgb,var(--primary) 8%,transparent),transparent);border-left-color:var(--primary);font-weight:500}.toc-num{font-family:var(--font-mono);font-size:11px;color:var(--text-4);font-weight:500;min-width:18px}.toc-link.active .toc-num{color:var(--primary)}.toc-sub{list-style:none;margin-left:20px;padding-left:12px;border-left:1px dashed var(--border);margin-top:2px;margin-bottom:4px}.toc-sub .toc-link{padding:4px 10px;font-size:12.5px}.toc-sub .toc-num{font-size:10px}.toc-item.hidden{display:none}
+.main{padding:0;min-width:0}.main-header{display:flex;align-items:center;justify-content:space-between;padding:18px 56px;border-bottom:1px solid var(--border-subtle);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:50}.crumb{font-size:12px;color:var(--text-3);font-family:var(--font-mono);letter-spacing:.05em}.crumb span{color:var(--primary)}.actions{display:flex;gap:8px;align-items:center}.icon-btn{width:36px;height:36px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text-2);cursor:pointer;display:grid;place-items:center;transition:all .15s}.icon-btn:hover{background:var(--surface-2);color:var(--text);border-color:var(--text-4)}.icon-btn svg{width:16px;height:16px}.sidebar-show{display:none}body.sidebar-collapsed .sidebar-show{display:grid}
+.hero{padding:80px 56px 64px;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,color-mix(in srgb,var(--primary) 8%,transparent),transparent 70%);pointer-events:none}.hero::after{content:'';position:absolute;bottom:-100px;left:-50px;width:350px;height:350px;background:radial-gradient(circle,color-mix(in srgb,var(--secondary) 8%,transparent),transparent 70%);pointer-events:none}.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;color:var(--primary);letter-spacing:.1em;text-transform:uppercase;background:color-mix(in srgb,var(--primary) 8%,transparent);padding:6px 12px;border-radius:100px;border:1px solid color-mix(in srgb,var(--primary) 20%,transparent);margin-bottom:24px}.hero-tag::before{content:'';width:6px;height:6px;background:var(--primary);border-radius:50%;box-shadow:0 0 10px var(--primary)}.hero h1{font-family:var(--font-display);font-size:clamp(36px,6vw,64px);font-weight:600;letter-spacing:-.025em;line-height:1.02;margin-bottom:24px;color:var(--text)}.hero h1 em{font-style:italic;font-weight:500;background:linear-gradient(135deg,var(--primary),var(--pop) 60%,var(--secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.hero-sub{font-size:18px;color:var(--text-2);max-width:640px;line-height:1.55}.hero-meta{display:flex;gap:24px;margin-top:40px;flex-wrap:wrap;padding-top:28px;border-top:1px solid var(--border-subtle)}.hero-meta-item{display:flex;flex-direction:column;gap:4px}.hero-meta-label{font-family:var(--font-mono);font-size:10px;color:var(--text-4);letter-spacing:.1em;text-transform:uppercase}.hero-meta-value{font-family:var(--font-display);font-size:22px;font-weight:500;color:var(--text);letter-spacing:-.01em}.hero-meta-value em{font-style:italic;color:var(--primary)}
+.article{padding:0 56px 120px;max-width:920px}.section{margin-top:80px;scroll-margin-top:30px;animation:fadeUp .5s ease both}.section:first-child{margin-top:0}.section-header{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border-subtle)}.section-num{font-family:var(--font-mono);font-size:12px;color:var(--primary);font-weight:500;letter-spacing:.1em;margin-bottom:8px;display:block}.section h2{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);font-weight:500;letter-spacing:-.02em;line-height:1.1;color:var(--text)}.section h2 em{font-style:italic;color:var(--secondary)}
+.subsection{margin-top:48px;scroll-margin-top:30px;animation:fadeUp .5s ease both}.subsection h3{font-family:var(--font-display);font-size:26px;font-weight:500;letter-spacing:-.015em;color:var(--text);margin-bottom:16px;display:flex;align-items:baseline;gap:12px}.subsection h3 .sub-num{font-family:var(--font-mono);font-size:13px;color:var(--text-4);font-weight:400}
+.article h4{font-family:var(--font-body);font-size:17px;font-weight:600;color:var(--text);margin-top:32px;margin-bottom:12px;letter-spacing:-.005em}.article p{color:var(--text-2);margin-bottom:16px;line-height:1.7}.article p strong{color:var(--text);font-weight:600}.article p em{color:var(--primary-soft);font-style:italic}.article a{color:var(--primary);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--primary) 30%,transparent);transition:border-color .15s}.article a:hover{border-bottom-color:var(--primary)}.article ul,.article ol{margin:12px 0 20px;padding-left:24px;color:var(--text-2)}.article ul li,.article ol li{margin-bottom:8px;padding-left:4px;line-height:1.65}.article ul li::marker{color:var(--primary)}.article ol li::marker{color:var(--secondary);font-family:var(--font-mono);font-size:.9em}.article code:not(pre code){font-family:var(--font-mono);font-size:.88em;background:var(--surface-2);color:var(--primary-soft);padding:2px 7px;border-radius:5px;border:1px solid var(--border-subtle);white-space:nowrap}
+.code-wrap{margin:20px 0 24px;border-radius:12px;background:var(--code-bg);border:1px solid var(--code-border);overflow:hidden;box-shadow:var(--shadow);position:relative}.code-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);border-bottom:1px solid var(--code-border)}.code-dots{display:flex;gap:6px;align-items:center}.code-dot{width:10px;height:10px;border-radius:50%}.code-dot:nth-child(1){background:#ff5f57}.code-dot:nth-child(2){background:#febc2e}.code-dot:nth-child(3){background:#28c840}.code-lang{font-family:var(--font-mono);font-size:11px;color:#828794;letter-spacing:.05em;text-transform:uppercase;margin-left:16px}.copy-btn{background:transparent;border:1px solid #2a2e3c;color:#b5b9c5;padding:4px 10px;border-radius:6px;font-family:var(--font-mono);font-size:11px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}.copy-btn:hover{color:var(--primary);border-color:var(--primary);background:color-mix(in srgb,var(--primary) 8%,transparent)}.copy-btn.copied{color:var(--green);border-color:var(--green);background:color-mix(in srgb,var(--green) 8%,transparent)}.copy-btn svg{width:12px;height:12px}
+pre{margin:0;padding:20px 24px;overflow-x:auto;font-family:var(--font-mono);font-size:13.5px;line-height:1.65;background:var(--code-bg)!important;color:#e8e9ed;scrollbar-width:thin;scrollbar-color:#2a2e3c transparent}pre::-webkit-scrollbar{height:6px}pre::-webkit-scrollbar-thumb{background:#2a2e3c;border-radius:3px}pre code{font-family:var(--font-mono)!important;background:transparent!important}
+.token.keyword{color:#ff7eb6;font-weight:500}.token.function{color:#79c0ff}.token.string{color:#7ee787}.token.number{color:#ffd866}.token.comment{color:#5a5e6b;font-style:italic}.token.class-name{color:#ffd866}.token.operator{color:#b388ff}.token.punctuation{color:#828794}.token.boolean{color:#b388ff}.token.builtin{color:#79c0ff}.token.annotation,.token.decorator{color:#ff8a3d}.token.parameter{color:#ff8a3d}.token.tag{color:#ff7eb6}.token.attr-name{color:#ffd866}.token.attr-value{color:#7ee787}.token.property{color:#79c0ff}.token.constant,.token.symbol{color:#ffd866}.token.variable{color:#ff8a3d}.token.regex,.token.char{color:#7ee787}.token.selector{color:#ff7eb6}.token.important,.token.atrule,.token.rule{color:#b388ff;font-weight:500}
+.callout{margin:24px 0;padding:18px 22px;border-radius:10px;border-left:3px solid;font-size:14.5px;line-height:1.65}.callout-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}.callout-label svg{width:14px;height:14px}.callout p{margin-bottom:0;color:var(--text-2)}.callout p+p{margin-top:10px}.callout.mistake{background:var(--mistake-bg);border-left-color:var(--primary)}.callout.mistake .callout-label{color:var(--primary)}.callout.warn{background:var(--warn-bg);border-left-color:var(--red)}.callout.warn .callout-label{color:var(--red)}.callout.tip{background:var(--tip-bg);border-left-color:var(--green)}.callout.tip .callout-label{color:var(--green)}.callout.note{background:var(--note-bg);border-left-color:var(--blue)}.callout.note .callout-label{color:var(--blue)}.callout.def{background:var(--def-bg);border-left-color:var(--secondary)}.callout.def .callout-label{color:var(--secondary)}
+.table-wrap{margin:20px 0 28px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow-sm)}table{width:100%;border-collapse:collapse;font-size:14px}thead{background:var(--surface-2);border-bottom:1px solid var(--border)}th{text-align:left;padding:12px 18px;font-family:var(--font-mono);font-size:11px;color:var(--text-3);font-weight:600;letter-spacing:.08em;text-transform:uppercase}td{padding:12px 18px;color:var(--text-2);border-top:1px solid var(--border-subtle);vertical-align:top}td:first-child{color:var(--text);font-weight:500}td code{font-size:.88em!important}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;padding:4px 10px;border-radius:100px;border:1px solid;letter-spacing:.02em}.tag.t-primary{color:var(--primary);border-color:color-mix(in srgb,var(--primary) 30%,transparent);background:color-mix(in srgb,var(--primary) 6%,transparent)}.tag.t-secondary{color:var(--secondary);border-color:color-mix(in srgb,var(--secondary) 30%,transparent);background:color-mix(in srgb,var(--secondary) 6%,transparent)}.tag.t-green{color:var(--green);border-color:color-mix(in srgb,var(--green) 25%,transparent);background:color-mix(in srgb,var(--green) 5%,transparent)}.tag.t-pop{color:var(--pop);border-color:color-mix(in srgb,var(--pop) 30%,transparent);background:color-mix(in srgb,var(--pop) 6%,transparent)}
+.divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:60px 0;color:var(--text-4)}.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}.divider span{font-family:var(--font-display);font-style:italic;font-size:18px;color:var(--text-3)}
+.back-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text-2);cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transition:all .25s;z-index:100;box-shadow:var(--shadow)}.back-top.visible{opacity:1;visibility:visible}.back-top:hover{background:var(--primary);color:var(--bg);border-color:var(--primary);transform:translateY(-2px)}.back-top svg{width:18px;height:18px}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:9999;padding:40px;cursor:zoom-out;backdrop-filter:blur(8px);animation:fadeIn .2s ease}.lightbox.open{display:flex}.lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.6);cursor:zoom-out;animation:zoomIn .25s ease}.lightbox-close{position:absolute;top:24px;right:24px;width:40px;height:40px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:50%;color:white;cursor:pointer;display:grid;place-items:center;transition:all .15s}.lightbox-close:hover{background:rgba(255,255,255,.2);transform:rotate(90deg)}.lightbox-close svg{width:18px;height:18px}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes zoomIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.menu-btn{display:none}@media(max-width:1100px){:root{--sidebar-w:280px}.sidebar-inner{padding:24px 20px}.hero{padding:60px 40px 48px}.article{padding:0 40px 100px}.main-header{padding:16px 40px}}@media(max-width:768px){.layout{grid-template-columns:1fr}body.sidebar-collapsed .layout{grid-template-columns:1fr}.sidebar{position:fixed;top:0;left:0;width:280px;z-index:200;transform:translateX(-100%);background:var(--bg);border-right:1px solid var(--border);opacity:1!important;pointer-events:auto!important}.sidebar.open{transform:translateX(0)}.sidebar-toggle{display:none}.sidebar-show{display:none!important}.menu-btn{display:grid}.hero{padding:48px 24px 40px}.hero h1{font-size:38px}.article{padding:0 24px 80px}.main-header{padding:14px 24px}.section{margin-top:64px}.subsection{margin-top:36px}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media print{:root,[data-theme="dark"],[data-theme="light"]{--bg:#fff!important;--text:#000!important;--text-2:#1a1a1a!important;--text-3:#444!important;--surface:#fff!important;--code-bg:#f5f5f5!important}body{background:white!important;background-image:none!important;color:black!important}.progress-bar,.sidebar,.main-header,.back-top,.copy-btn,.code-dots,.menu-btn,.sidebar-toggle,.sidebar-show,.icon-btn,.lightbox{display:none!important}.layout{display:block!important}.main,.article{padding:0!important;max-width:none!important}.hero{padding:0 0 24pt!important;border-bottom:2pt solid black}.hero::before,.hero::after{display:none!important}.hero h1{font-size:28pt!important;color:black!important}.hero h1 em{-webkit-text-fill-color:black!important;background:none!important}.section{margin-top:24pt;animation:none!important}.section h2,.section h2 em{color:black!important}.code-wrap{box-shadow:none!important;page-break-inside:avoid}pre{color:black!important;font-size:9pt}.callout{page-break-inside:avoid}}
+.star{color:var(--secondary);font-size:1.1em}
+</style>
+</head>
+<body>
+<div class="progress-bar"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar"><div class="sidebar-inner">
+<div class="brand-row"><div class="brand"><div class="brand-mark">K</div><div class="brand-text"><div class="brand-title">Kotlin Mastery</div><div class="brand-sub">Interview Prep · 2024</div></div></div><button class="sidebar-toggle" id="sidebarToggle" aria-label="Collapse sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"/></svg></button></div>
+<div class="search-wrap"><svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input type="search" class="search-input" id="search" placeholder="Filter sections…"></div>
+<div class="nav-label">Index</div>
+<nav><ul class="toc">
+<li class="toc-item"><a href="#s1" class="toc-link"><span class="toc-num">01</span><span>Variables &amp; Types</span></a></li>
+<li class="toc-item"><a href="#s2" class="toc-link"><span class="toc-num">02</span><span>Null Safety</span></a></li>
+<li class="toc-item"><a href="#s3" class="toc-link"><span class="toc-num">03</span><span>Control Flow</span></a></li>
+<li class="toc-item"><a href="#s4" class="toc-link"><span class="toc-num">04</span><span>OOP &amp; Classes</span></a></li>
+<li class="toc-item"><a href="#s5" class="toc-link"><span class="toc-num">05</span><span>Functions</span></a></li>
+<li class="toc-item"><a href="#s6" class="toc-link"><span class="toc-num">06</span><span>Collections</span></a></li>
+<li class="toc-item"><a href="#s7" class="toc-link"><span class="toc-num">07</span><span>Generics &amp; Variance</span></a></li>
+<li class="toc-item"><a href="#s8" class="toc-link"><span class="toc-num">08</span><span>Delegation</span></a></li>
+<li class="toc-item"><a href="#s9" class="toc-link"><span class="toc-num">09</span><span>Coroutines</span></a></li>
+<li class="toc-item"><a href="#s10" class="toc-link"><span class="toc-num">10</span><span>Flow</span></a></li>
+<li class="toc-item"><a href="#s11" class="toc-link"><span class="toc-num">11</span><span>DSL</span></a></li>
+<li class="toc-item"><a href="#s12" class="toc-link"><span class="toc-num">12</span><span>Interview Puzzles</span></a></li>
+<li class="toc-item"><a href="#s13" class="toc-link"><span class="toc-num">13</span><span>Interview Q&amp;A</span></a></li>
+</ul></nav>
+</div></aside>
+
+<div class="main">
+<header class="main-header">
+<div style="display:flex;align-items:center;gap:14px;">
+<button class="icon-btn menu-btn" id="menuBtn" aria-label="Toggle menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<button class="icon-btn sidebar-show" id="sidebarShow" aria-label="Show sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg></button>
+<div class="crumb"><span>// </span>kotlin / mastery / interview-guide</div>
+</div>
+<div class="actions">
+<button class="icon-btn" id="printBtn" aria-label="Print"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
+<button class="icon-btn" id="themeBtn" aria-label="Toggle theme"><svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
+</div>
+</header>
+
+<section class="hero">
+<span class="hero-tag">Reference · Kotlin 2.x · Android &amp; JVM</span>
+<h1>The Complete <em>Kotlin</em> Mastery Guide</h1>
+<p class="hero-sub">From fundamentals to advanced patterns — everything you need for your Senior Android Developer interview. Code examples, comparison tables, and 50+ Q&amp;A.</p>
+<div class="hero-meta">
+<div class="hero-meta-item"><div class="hero-meta-label">Sections</div><div class="hero-meta-value"><em>13</em></div></div>
+<div class="hero-meta-item"><div class="hero-meta-label">Code Examples</div><div class="hero-meta-value"><em>80+</em></div></div>
+<div class="hero-meta-item"><div class="hero-meta-label">Interview Q&amp;A</div><div class="hero-meta-value"><em>50+</em></div></div>
+<div class="hero-meta-item"><div class="hero-meta-label">Read Time</div><div class="hero-meta-value"><em>~60m</em></div></div>
+</div>
+</section>
+
+<article class="article">
+
+<!-- ══════ S1 ══════ -->
+<section class="section" id="s1">
+<header class="section-header"><span class="section-num">01 / Foundations</span><h2>Variables &amp; <em>Type System</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">val · var</span><span class="tag t-secondary">Types</span><span class="tag t-green">Basics</span></div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>val</th><th>var</th><th>const val</th></tr></thead>
+<tbody>
+<tr><td>Reassignable?</td><td>No (read-only ref)</td><td>Yes</td><td>No</td></tr>
+<tr><td>Compile-time?</td><td>No (runtime init OK)</td><td>No</td><td>Yes (must be primitive/String)</td></tr>
+<tr><td>Where?</td><td>Anywhere</td><td>Anywhere</td><td>Top-level or companion only</td></tr>
+<tr><td>Immutable?</td><td>Reference only — contents can change!</td><td>No</td><td>Truly immutable</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout warn"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M4.93 19.07A10 10 0 1 1 19.07 4.93 10 10 0 0 1 4.93 19.07z"/></svg>Warning</div>
+<p><code>val list = mutableListOf(1, 2, 3)</code> — the <em>reference</em> is read-only but the <em>list contents</em> can change. <code>val</code> ≠ immutable!</p></div>
+
+<h4>lateinit vs lazy</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>lateinit</th><th>by lazy</th></tr></thead>
+<tbody>
+<tr><td>Keyword</td><td><code>lateinit var</code></td><td><code>val by lazy { }</code></td></tr>
+<tr><td>Mutability</td><td>var only</td><td>val only</td></tr>
+<tr><td>Null</td><td>Non-null types only</td><td>Can be nullable</td></tr>
+<tr><td>Init</td><td>Manual, before first access</td><td>Automatic on first access</td></tr>
+<tr><td>Thread safe?</td><td>No</td><td>Yes (SYNCHRONIZED default)</td></tr>
+<tr><td>Use case</td><td>DI injection, Android views</td><td>Expensive computation, config</td></tr>
+</tbody>
+</table></div>
+
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// val vs var
+val immutable = "can't reassign"
+var mutable = "can reassign"
+mutable = "changed!"
+
+// lateinit — for non-null vars initialized later (DI, Android)
+lateinit var name: String
+name = "Nikhil"
+
+// lazy — computed on first access, then cached
+val expensive: String by lazy {
+    println("Computing...")
+    "result"
+}
+println(expensive) // prints "Computing..." then "result"
+println(expensive) // prints "result" only (cached)</code></pre></div>
+
+<h4>Type Hierarchy</h4>
+<p><code>Any</code> is the root of all non-nullable types (like Java's Object). <code>Unit</code> is Kotlin's void — it's an actual object. <code>Nothing</code> is the bottom type — subtype of everything. Functions returning <code>Nothing</code> never return (always throw). This is why <code>val x: String = nullableStr ?: throw Exception()</code> compiles — <code>throw</code> returns <code>Nothing</code>, which is a subtype of <code>String</code>.</p>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S2 ══════ -->
+<section class="section" id="s2">
+<header class="section-header"><span class="section-num">02 / Safety</span><h2>Null <em>Safety</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">?.</span><span class="tag t-secondary">?:</span><span class="tag t-pop">!!</span></div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Operator</th><th>Name</th><th>Behavior</th><th>When to Use</th></tr></thead>
+<tbody>
+<tr><td><code>?.</code></td><td>Safe call</td><td>Returns null if receiver is null</td><td>Default choice — always safe</td></tr>
+<tr><td><code>?:</code></td><td>Elvis</td><td>Provides fallback if left side is null</td><td>Default values, early returns</td></tr>
+<tr><td><code>!!</code></td><td>Non-null assertion</td><td>Throws NPE if null</td><td><strong>Almost never.</strong> Only when you're 100% certain</td></tr>
+<tr><td><code>?.let { }</code></td><td>Safe let</td><td>Executes block only if non-null</td><td>Transform + null check in one step</td></tr>
+<tr><td><code>as?</code></td><td>Safe cast</td><td>Returns null if cast fails</td><td>Type checking without crash</td></tr>
+</tbody>
+</table></div>
+
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Null Safety</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">val name: String? = null
+
+// Safe call
+val len = name?.length          // null (no crash)
+
+// Elvis — fallback
+val len2 = name?.length ?: 0    // 0
+
+// Elvis with throw (common in Android)
+val id = intent.getStringExtra("id")
+    ?: throw IllegalArgumentException("id required")
+
+// Safe let — execute block only if non-null
+name?.let { println("Name is $it") } // skipped
+
+// Smart cast after null check
+if (name != null) {
+    println(name.length) // compiler knows name is String here
+}</code></pre></div>
+
+<div class="callout mistake"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>Common Mistake</div>
+<p>Using <code>!!</code> everywhere "because I know it's not null." This defeats Kotlin's null safety. Use <code>?:</code> with a default or <code>requireNotNull()</code> with a message instead.</p></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S3 ══════ -->
+<section class="section" id="s3">
+<header class="section-header"><span class="section-num">03 / Control Flow</span><h2>Expressions &amp; <em>Patterns</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">when</span><span class="tag t-secondary">if expression</span><span class="tag t-green">ranges</span></div>
+
+<p>In Kotlin, <code>if</code> and <code>when</code> are <strong>expressions</strong> — they return values. No ternary operator needed.</p>
+
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// if is an expression — returns a value
+val max = if (a &gt; b) a else b
+
+// when — exhaustive with sealed classes
+val result = when (state) {
+    is State.Loading -&gt; "Loading..."
+    is State.Success -&gt; "Data: ${state.data}"
+    is State.Error   -&gt; "Error: ${state.msg}"
+    // No else needed — compiler enforces all cases!
+}
+
+// when with ranges, type checks, multiple values
+fun classify(x: Any): String = when (x) {
+    in 1..10       -&gt; "small number"
+    is String      -&gt; "string of length ${x.length}" // smart cast
+    "hello", "hi"  -&gt; "greeting"
+    else           -&gt; "unknown"
+}</code></pre></div>
+
+<div class="callout warn"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M4.93 19.07A10 10 0 1 1 19.07 4.93 10 10 0 0 1 4.93 19.07z"/></svg>Warning</div>
+<p><strong>when as statement (no assignment) is NOT exhaustive!</strong> Missing branches compile silently. Always use <code>when</code> as an expression (<code>val x = when...</code>) with sealed classes to get compile-time safety.</p></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S4 ══════ -->
+<section class="section" id="s4">
+<header class="section-header"><span class="section-num">04 / OOP</span><h2>Classes &amp; <em>Objects</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">data class</span><span class="tag t-secondary">sealed</span><span class="tag t-pop">object</span><span class="tag t-green">value class</span></div>
+
+<h4>Data Classes — What's Generated?</h4>
+<p>Compiler generates from <strong>primary constructor properties only</strong>: <code>equals()</code>, <code>hashCode()</code>, <code>toString()</code>, <code>copy()</code>, <code>componentN()</code>.</p>
+
+<div class="callout mistake"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>Common Mistake</div>
+<p><strong>Body properties are EXCLUDED</strong> from equals/hashCode/toString! <code>data class User(val name: String) { var age = 0 }</code> — two Users with different ages are still "equal" because age is in the body, not the constructor.</p></div>
+
+<div class="callout mistake"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>Common Mistake</div>
+<p><strong>copy() is SHALLOW.</strong> <code>val copy = original.copy()</code> shares the same list references. Mutating <code>copy.tags.add("x")</code> also modifies the original! Fix: <code>original.copy(tags = original.tags.toMutableList())</code></p></div>
+
+<h4>Sealed Classes vs Enums</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>Sealed Class/Interface</th><th>Enum Class</th></tr></thead>
+<tbody>
+<tr><td>Subclass state</td><td>Each subclass can hold different data</td><td>All entries share same structure</td></tr>
+<tr><td>Instance count</td><td>Multiple instances per subclass</td><td>Fixed singleton per entry</td></tr>
+<tr><td>Exhaustive when</td><td>Yes (as expression)</td><td>Yes</td></tr>
+<tr><td>Inheritance</td><td>Subclasses can be data/object/regular</td><td>All are the same enum type</td></tr>
+<tr><td>Use case</td><td>UI state, Result types, navigation</td><td>Fixed sets (Direction, Status)</td></tr>
+</tbody>
+</table></div>
+
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Sealed + Object</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// Sealed — perfect for UI state
+sealed interface UiState&lt;out T&gt; {
+    data object Loading : UiState&lt;Nothing&gt;
+    data class Success&lt;T&gt;(val data: T) : UiState&lt;T&gt;
+    data class Error(val msg: String) : UiState&lt;Nothing&gt;
+}
+
+// Object = singleton
+object Logger { fun log(msg: String) = println(msg) }
+
+// Companion object = "static" in Kotlin
+class User(val name: String) {
+    companion object {
+        const val MAX_NAME = 50
+        fun create(name: String) = User(name)
+    }
+}
+val user = User.create("Alice") // called like static
+
+// Value class — type safety, zero runtime cost
+@JvmInline value class Email(val value: String)
+@JvmInline value class UserId(val value: Int)
+// Can't accidentally pass UserId where Email is expected!</code></pre></div>
+
+<h4>Init Block Order</h4>
+<p>Properties and init blocks execute in <strong>textual order</strong> — not "all properties first" or "all inits first." This surprises many developers.</p>
+
+<div class="callout tip"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.7 1.5 5 4 6.3V18h6v-2.7c2.5-1.3 4-3.6 4-6.3a7 7 0 0 0-7-7z"/></svg>Tip</div>
+<p><strong>Never access open/overridable properties in init blocks.</strong> When a derived class overrides a property, the base class init runs first — before the derived property is initialized. The compiler warns about this.</p></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S5 ══════ -->
+<section class="section" id="s5">
+<header class="section-header"><span class="section-num">05 / Functions</span><h2>First-Class <em>Citizens</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">Scope Functions</span><span class="tag t-secondary">Extensions</span><span class="tag t-pop">Inline</span></div>
+
+<h4>Scope Functions — The Definitive Table</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Function</th><th>Context</th><th>Returns</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td><code>let</code></td><td><code>it</code></td><td>Lambda result</td><td>Null check + transform: <code>x?.let { ... }</code></td></tr>
+<tr><td><code>run</code></td><td><code>this</code></td><td>Lambda result</td><td>Object config + compute result</td></tr>
+<tr><td><code>with</code></td><td><code>this</code></td><td>Lambda result</td><td>Group calls on an object (non-extension)</td></tr>
+<tr><td><code>apply</code></td><td><code>this</code></td><td>Context object</td><td>Object configuration (returns self)</td></tr>
+<tr><td><code>also</code></td><td><code>it</code></td><td>Context object</td><td>Side effects: logging, validation</td></tr>
+</tbody>
+</table></div>
+
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Scope Functions</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// let — null check + transform
+val len: Int? = name?.let { it.length }
+
+// apply — configure object (returns the object)
+val user = User().apply {
+    name = "Alice"
+    email = "alice@test.com"
+}
+
+// also — side effects (returns the object)
+val list = mutableListOf(1, 2, 3)
+    .also { println("Before: $it") }
+    .also { it.add(4) }</code></pre></div>
+
+<h4>Extension Functions</h4>
+<div class="callout note"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Note</div>
+<p>Extensions are resolved <strong>statically</strong> at compile time. They can't access private members. If a member function has the same signature, <strong>member always wins</strong>. Extensions don't support polymorphism — <code>animal.ext()</code> calls <code>Animal.ext</code>, not <code>Dog.ext</code>, regardless of runtime type.</p></div>
+
+<h4>inline / noinline / crossinline / reified</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Keyword</th><th>What It Does</th><th>When to Use</th></tr></thead>
+<tbody>
+<tr><td><code>inline</code></td><td>Copies function body to call site</td><td>HOFs with lambdas (avoids object allocation)</td></tr>
+<tr><td><code>noinline</code></td><td>Prevents specific lambda from being inlined</td><td>When lambda is stored or passed elsewhere</td></tr>
+<tr><td><code>crossinline</code></td><td>Prevents non-local return in lambda</td><td>When lambda runs in a different context</td></tr>
+<tr><td><code>reified</code></td><td>Preserves generic type at runtime</td><td><code>is T</code> checks, <code>T::class</code> access (requires inline)</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S6 ══════ -->
+<section class="section" id="s6">
+<header class="section-header"><span class="section-num">06 / Collections</span><h2>Functional <em>Operations</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">Sequences</span><span class="tag t-secondary">Transformations</span><span class="tag t-green">Aggregation</span></div>
+
+<h4>Key Operations</h4>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Collections</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">val nums = listOf(1, 2, 3, 4, 5)
+
+// map — transform each element
+nums.map { it * 2 }           // [2, 4, 6, 8, 10]
+
+// flatMap — map + flatten
+listOf("Hello World", "Kotlin")
+    .flatMap { it.split(" ") } // [Hello, World, Kotlin]
+
+// filter, partition
+val (evens, odds) = nums.partition { it % 2 == 0 }
+
+// groupBy vs associateBy
+users.groupBy { it.dept }     // Map&lt;String, List&lt;User&gt;&gt; — ALL values
+users.associateBy { it.dept } // Map&lt;String, User&gt; — LAST wins! Duplicates LOST
+
+// fold vs reduce
+nums.fold(10) { acc, n -&gt; acc + n } // 25 (10 + 1+2+3+4+5)
+nums.reduce { acc, n -&gt; acc + n }   // 15 (starts from first element)</code></pre></div>
+
+<div class="callout warn"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M4.93 19.07A10 10 0 1 1 19.07 4.93 10 10 0 0 1 4.93 19.07z"/></svg>Warning</div>
+<p><code>reduce</code> <strong>crashes on empty list!</strong> Use <code>fold</code> when the list might be empty. Also: <code>emptyList&lt;Int&gt;().all { it &gt; 100 }</code> returns <strong>true</strong> (vacuous truth) — a common interview trap.</p></div>
+
+<h4>Sequence vs List</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>List (Eager)</th><th>Sequence (Lazy)</th></tr></thead>
+<tbody>
+<tr><td>Evaluation</td><td>Each operation processes ALL elements</td><td>Element-by-element through all operations</td></tr>
+<tr><td>Intermediate results</td><td>Creates new list per step</td><td>No intermediate collections</td></tr>
+<tr><td>Short-circuit</td><td>No — processes everything</td><td>Yes — <code>first()</code> stops early</td></tr>
+<tr><td>When to use</td><td>Small collections, simple chains</td><td>Large collections, chained operations, <code>first/take</code></td></tr>
+</tbody>
+</table></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S7 ══════ -->
+<section class="section" id="s7">
+<header class="section-header"><span class="section-num">07 / Generics</span><h2>Variance &amp; <em>Reified</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">in / out</span><span class="tag t-secondary">reified</span><span class="tag t-pop">star projection</span></div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Variance</th><th>Keyword</th><th>Direction</th><th>Example</th><th>Mnemonic</th></tr></thead>
+<tbody>
+<tr><td>Covariant</td><td><code>out T</code></td><td>Only returned (produced)</td><td><code>List&lt;out E&gt;</code>, <code>Flow&lt;out T&gt;</code></td><td><strong>P</strong>roducer = <strong>O</strong>ut</td></tr>
+<tr><td>Contravariant</td><td><code>in T</code></td><td>Only accepted (consumed)</td><td><code>Comparable&lt;in T&gt;</code>, <code>Comparator&lt;in T&gt;</code></td><td><strong>C</strong>onsumer = <strong>I</strong>n</td></tr>
+<tr><td>Invariant</td><td>(default)</td><td>Both read and write</td><td><code>MutableList&lt;T&gt;</code></td><td>No keyword</td></tr>
+</tbody>
+</table></div>
+
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Variance</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// COVARIANT — Producer&lt;Dog&gt; IS-A Producer&lt;Animal&gt;
+class Producer&lt;out T&gt;(val value: T) {
+    fun produce(): T = value
+    // fun consume(item: T) {} // ERROR! Can't use T in 'in' position
+}
+val dogs: List&lt;Dog&gt; = listOf(Dog())
+val animals: List&lt;Animal&gt; = dogs // OK! List is covariant (out)
+
+// REIFIED — access generic type at runtime (requires inline)
+inline fun &lt;reified T&gt; isType(value: Any): Boolean = value is T
+isType&lt;String&gt;("hello") // true — works because reified!</code></pre></div>
+
+<div class="callout def"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Definition</div>
+<p><strong>Type Erasure:</strong> JVM erases generic types at runtime. <code>List&lt;String&gt;</code> and <code>List&lt;Int&gt;</code> are both just <code>List</code>. Reified + inline is Kotlin's workaround — the compiler substitutes the actual type at each call site.</p></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S8 ══════ -->
+<section class="section" id="s8">
+<header class="section-header"><span class="section-num">08 / Delegation</span><h2>Composition Over <em>Inheritance</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">by lazy</span><span class="tag t-secondary">by observable</span><span class="tag t-green">class delegation</span></div>
+
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Delegation</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// Class delegation — avoids inheritance
+class PrefixLogger(printer: Printer, val prefix: String)
+    : Printer by printer {
+    override fun print(msg: String) = println("$prefix $msg")
+}
+
+// lazy — computed on first access
+val expensive by lazy { computeExpensiveValue() }
+
+// observable — callback on every change
+var name by Delegates.observable("initial") { _, old, new -&gt;
+    println("$old → $new")
+}
+
+// vetoable — can REJECT the change
+var age by Delegates.vetoable(0) { _, _, new -&gt; new &gt;= 0 }</code></pre></div>
+
+<div class="callout tip"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.7 1.5 5 4 6.3V18h6v-2.7c2.5-1.3 4-3.6 4-6.3a7 7 0 0 0-7-7z"/></svg>Tip</div>
+<p>Kotlin classes are <strong>final by default</strong>. This pushes you toward composition/delegation by design. Prefer delegation over inheritance — it avoids the fragile base class problem and allows composing multiple behaviors.</p></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S9 ══════ -->
+<section class="section" id="s9">
+<header class="section-header"><span class="section-num">09 / Coroutines</span><h2>Structured <em>Concurrency</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">launch</span><span class="tag t-secondary">async</span><span class="tag t-pop">withContext</span><span class="tag t-green">Flow</span></div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Builder</th><th>Returns</th><th>Use Case</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td><code>launch</code></td><td>Job</td><td>Fire-and-forget</td><td>No result</td></tr>
+<tr><td><code>async</code></td><td>Deferred&lt;T&gt;</td><td>Need the result</td><td>Call <code>.await()</code></td></tr>
+<tr><td><code>withContext</code></td><td>T</td><td>Switch dispatcher + wait</td><td>Returns directly</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout mistake"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>Common Mistake</div>
+<p><strong>withContext is SEQUENTIAL!</strong> Two <code>withContext(IO)</code> calls = 200ms, not 100ms. Use <code>async { } + await()</code> for parallel execution.</p></div>
+
+<h4>coroutineScope vs supervisorScope</h4>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>coroutineScope</th><th>supervisorScope</th></tr></thead>
+<tbody>
+<tr><td>Child fails</td><td>ALL siblings cancelled</td><td>Only that child dies</td></tr>
+<tr><td>Exception</td><td>Propagates up</td><td>Handled per-child</td></tr>
+<tr><td>Use case</td><td>Related tasks (all must succeed)</td><td>Independent tasks (viewModelScope)</td></tr>
+</tbody>
+</table></div>
+
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Dispatchers</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// Dispatchers
+Dispatchers.Main      // UI thread (Android)
+Dispatchers.IO        // Network, disk I/O (up to 64 threads)
+Dispatchers.Default   // CPU-intensive (cores count)
+Dispatchers.Unconfined // Starts in caller, resumes anywhere
+
+// Parallel with async
+coroutineScope {
+    val user = async { api.getUser() }
+    val posts = async { api.getPosts() }
+    // Both run concurrently! Total = max(userTime, postsTime)
+    showDashboard(user.await(), posts.await())
+}
+
+// Cancellation is COOPERATIVE
+val job = launch {
+    while (isActive) { // must check!
+        doWork()
+        delay(100) // delay is a cancellation point
+    }
+}
+job.cancel() // only works because we check isActive/delay</code></pre></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S10 ══════ -->
+<section class="section" id="s10">
+<header class="section-header"><span class="section-num">10 / Flow</span><h2>Reactive <em>Streams</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">StateFlow</span><span class="tag t-secondary">SharedFlow</span><span class="tag t-pop">Cold vs Hot</span></div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>Flow (cold)</th><th>StateFlow (hot)</th><th>SharedFlow (hot)</th></tr></thead>
+<tbody>
+<tr><td>Starts</td><td>On collect()</td><td>Immediately</td><td>Immediately</td></tr>
+<tr><td>Initial value</td><td>No</td><td>Yes (always has value)</td><td>No</td></tr>
+<tr><td>Replay</td><td>Restarts per collector</td><td>Latest value (replay=1)</td><td>Configurable</td></tr>
+<tr><td>Deduplication</td><td>No</td><td>Yes (equals())</td><td>No</td></tr>
+<tr><td>Use case</td><td>Room queries, one-shot</td><td>UI state in ViewModel</td><td>Events (nav, snackbar)</td></tr>
+</tbody>
+</table></div>
+
+<div class="callout warn"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M4.93 19.07A10 10 0 1 1 19.07 4.93 10 10 0 0 1 4.93 19.07z"/></svg>Warning</div>
+<p><strong>StateFlow deduplicates!</strong> Setting the same value won't emit. If you mutate a data class and re-emit the same reference, StateFlow won't notify collectors because <code>equals()</code> returns true. Always use <code>.copy()</code> to create new objects.</p></div>
+
+<div class="callout warn"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M4.93 19.07A10 10 0 1 1 19.07 4.93 10 10 0 0 1 4.93 19.07z"/></svg>Warning</div>
+<p><strong>collectLatest CANCELS previous processing!</strong> If your collector does slow work (DB save), use <code>collect</code> not <code>collectLatest</code>. collectLatest is for search-as-you-type where you want to discard stale results.</p></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S11 ══════ -->
+<section class="section" id="s11">
+<header class="section-header"><span class="section-num">11 / DSL</span><h2>Domain Specific <em>Languages</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">Lambda with Receiver</span><span class="tag t-secondary">@DslMarker</span></div>
+
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · DSL Pattern</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// Lambda with receiver: T.() -&gt; Unit
+// Inside the lambda, 'this' is the receiver
+fun server(block: ServerConfig.() -&gt; Unit): ServerConfig =
+    ServerConfig().apply(block)
+
+val config = server {
+    host = "localhost"  // 'this' is ServerConfig
+    port = 8080
+    database {          // nested lambda with receiver
+        url = "jdbc:..."
+    }
+}
+
+// This is EXACTLY how Gradle KTS, Compose, and Ktor work:
+// dependencies { implementation(...) } ← lambda with receiver
+// Column { Text("...") }               ← @Composable lambda</code></pre></div>
+
+<div class="callout note"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Note</div>
+<p><code>@DslMarker</code> prevents scope leaking — inner lambdas can only access their own receiver, not outer receivers. Without it, you could accidentally call <code>body { body { } }</code> accessing the outer html receiver.</p></div>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S12 ══════ -->
+<section class="section" id="s12">
+<header class="section-header"><span class="section-num">12 / Puzzles</span><h2>Predict the <em>Output</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">Interview</span><span class="tag t-pop">Tricky</span><span class="tag t-secondary">Must-Know</span></div>
+
+<p>These are the exact puzzles asked in Android interviews. Predict the output before reading the answer.</p>
+
+<h4>Puzzle 1: async ordering</h4>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Puzzle</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">val d1 = async { delay(100); println("First"); 10 }
+val d2 = async { delay(50); println("Second"); 20 }
+println(d1.await())
+println(d2.await())</code></pre></div>
+<p><strong>Answer:</strong> Second, First, 10, 20. Both start immediately. d2 finishes first (50ms) but d1.await() suspends until d1 completes.</p>
+
+<h4>Puzzle 2: data class body property</h4>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Puzzle</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">data class Person(val name: String) { var age: Int = 0 }
+val p1 = Person("Alice").apply { age = 25 }
+val p2 = Person("Alice").apply { age = 99 }
+println(p1 == p2) // ?</code></pre></div>
+<p><strong>Answer:</strong> <code>true</code>. Body properties (age) are excluded from equals(). Only constructor params (name) participate.</p>
+
+<h4>Puzzle 3: reduce on empty</h4>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Puzzle</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">emptyList&lt;Int&gt;().reduce { acc, n -&gt; acc + n } // ?
+emptyList&lt;Int&gt;().all { it &gt; 1000 }            // ?</code></pre></div>
+<p><strong>Answer:</strong> reduce throws <code>UnsupportedOperationException</code>. all() returns <code>true</code> (vacuous truth). Use fold() for safe aggregation.</p>
+
+<h4>Puzzle 4: launch order</h4>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Puzzle</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">launch { println("A") }
+launch { println("B") }
+println("C")</code></pre></div>
+<p><strong>Answer:</strong> C, A, B. <code>launch{}</code> schedules but doesn't execute immediately. Current coroutine continues first.</p>
+
+<h4>Puzzle 5: StateFlow dedup</h4>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Puzzle</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">val sf = MutableStateFlow(1)
+sf.value = 1  // same value
+sf.value = 2
+sf.value = 2  // same again
+sf.value = 3
+// How many emissions? What values?</code></pre></div>
+<p><strong>Answer:</strong> 3 emissions: 1 (initial), 2, 3. Duplicate values are skipped by equals().</p>
+</section>
+
+<div class="divider"><span>✦</span></div>
+
+<!-- ══════ S13 ══════ -->
+<section class="section" id="s13">
+<header class="section-header"><span class="section-num">13 / Interview</span><h2>Q&amp;A with <em>Answers</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">Must-Know</span><span class="tag t-secondary">Senior Level</span></div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>Question</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td><span class="star">⭐</span>1</td><td>val vs var?</td><td><code>val</code> = read-only reference (NOT immutable — contents can change). <code>var</code> = reassignable. <code>const val</code> = compile-time constant (primitives/String only, top-level or companion).</td></tr>
+<tr><td><span class="star">⭐</span>2</td><td>== vs ===?</td><td><code>==</code> is structural equality (calls <code>equals()</code>). <code>===</code> is referential equality (same object in memory). Kotlin's <code>==</code> is null-safe.</td></tr>
+<tr><td><span class="star">⭐</span>3</td><td>What does data class generate?</td><td><code>equals()</code>, <code>hashCode()</code>, <code>toString()</code>, <code>copy()</code>, <code>componentN()</code> — from PRIMARY CONSTRUCTOR properties only. Body properties are excluded.</td></tr>
+<tr><td><span class="star">⭐</span>4</td><td>Sealed class vs enum?</td><td>Sealed: subclasses can hold different state, can be data/object/regular. Enum: fixed singleton instances, same structure. Use sealed for UI state, enum for fixed sets.</td></tr>
+<tr><td><span class="star">⭐</span>5</td><td>launch vs async?</td><td><code>launch</code> = fire-and-forget (Job, no result). <code>async</code> = returns Deferred&lt;T&gt;, call <code>.await()</code> for result. Use async for parallel work.</td></tr>
+<tr><td>6</td><td>Scope functions — when to use which?</td><td>let(it→result): null check. apply(this→obj): configure. also(it→obj): side effects. run(this→result): config+compute. with(this→result): group calls.</td></tr>
+<tr><td>7</td><td>What is reified?</td><td>Preserves generic type at runtime. Requires <code>inline</code>. Enables <code>is T</code> checks and <code>T::class</code>. Without it, type is erased by JVM.</td></tr>
+<tr><td><span class="star">⭐</span>8</td><td>Coroutine vs Thread?</td><td>Coroutine: lightweight (many per thread), suspendable, structured. Thread: OS-level, expensive (1MB stack), blocking. 10K coroutines = fine. 10K threads = crash.</td></tr>
+<tr><td><span class="star">⭐</span>9</td><td>StateFlow vs SharedFlow?</td><td>StateFlow: always has value, deduplicates (equals), replay=1. Use for UI state. SharedFlow: no initial value, configurable replay. Use for events (navigation, snackbar).</td></tr>
+<tr><td><span class="star">⭐</span>10</td><td>Flow vs LiveData?</td><td>Flow: Kotlin-native, richer operators, cold, not lifecycle-aware by default. LiveData: Android, lifecycle-aware, limited operators. Modern: Flow + <code>collectAsStateWithLifecycle()</code>.</td></tr>
+<tr><td>11</td><td>Structured concurrency?</td><td>Coroutines form parent-child trees. Parent waits for children. If parent cancels → children cancel. If child fails → parent knows. No leaked/orphaned coroutines.</td></tr>
+<tr><td>12</td><td>Variance: in vs out?</td><td><code>out</code> = producer (covariant): Producer&lt;Dog&gt; IS-A Producer&lt;Animal&gt;. <code>in</code> = consumer (contravariant): Consumer&lt;Animal&gt; IS-A Consumer&lt;Dog&gt;. POCI mnemonic.</td></tr>
+<tr><td>13</td><td>Extension function limits?</td><td>Resolved statically (compile time). Can't access private members. Member function always wins over extension. No polymorphism.</td></tr>
+<tr><td>14</td><td>lateinit vs lazy?</td><td>lateinit: var, non-null, manual init, not thread-safe. lazy: val, auto-init on first access, thread-safe (SYNCHRONIZED).</td></tr>
+<tr><td>15</td><td>Nothing type?</td><td>Bottom type — subtype of everything. For functions that never return (throw). Enables <code>val x = nullable ?: fail("msg")</code> to compile because Nothing is subtype of any type.</td></tr>
+<tr><td><span class="star">⭐</span>16</td><td>coroutineScope vs supervisorScope?</td><td>coroutineScope: one child fails → all siblings cancelled. supervisorScope: child failure is isolated, siblings continue. viewModelScope uses SupervisorJob.</td></tr>
+<tr><td>17</td><td>withContext vs launch?</td><td>withContext: sequential (suspends, returns result). launch: concurrent (doesn't return result). Use withContext for dispatcher switching, launch for fire-and-forget.</td></tr>
+<tr><td>18</td><td>What is inline good for?</td><td>Copies function body at call site. Avoids lambda object allocation for higher-order functions. Required for reified type parameters.</td></tr>
+<tr><td>19</td><td>Object vs companion object?</td><td>Object: standalone singleton. Companion: belongs to a class, accessed via class name (like static). Companion can implement interfaces.</td></tr>
+<tr><td>20</td><td>Nested vs inner class?</td><td>Nested (default): no reference to outer, no memory leak risk. Inner: holds outer reference, can access outer members, memory leak risk. Prefer nested.</td></tr>
+<tr><td><span class="star">⭐</span>21</td><td>copy() shallow trap?</td><td><code>copy()</code> is shallow — shared mutable collections are the SAME reference. Modifying the copy's list modifies the original. Fix: <code>copy(list = list.toMutableList())</code></td></tr>
+<tr><td>22</td><td>Cancellation cooperative?</td><td>Coroutines must check for cancellation (isActive, ensureActive, yield). delay() is a cancellation point. Thread.sleep() is NOT — ignores cancel.</td></tr>
+<tr><td>23</td><td>collectLatest behavior?</td><td>Cancels previous collection when new value arrives. Only the latest value completes processing. Use for search-as-you-type. DON'T use for DB saves.</td></tr>
+<tr><td>24</td><td>Value class benefit?</td><td>Type safety with zero runtime cost. At runtime, <code>Email("x")</code> is just the String "x". At compile time, Email and Username are distinct types — prevents mixing.</td></tr>
+<tr><td><span class="star">⭐</span>25</td><td>equals/hashCode contract?</td><td>If <code>a == b</code>, then <code>a.hashCode() == b.hashCode()</code>. Breaking this (override equals but not hashCode) breaks HashMap — lookup returns null even for "equal" keys.</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<!-- CLOSING -->
+<div style="margin-top:80px;text-align:center;padding-top:40px;border-top:1px solid var(--border-subtle);">
+<div style="font-family:var(--font-display);font-style:italic;font-size:20px;color:var(--text-3);">Master the language, ace the interview.</div>
+<div style="font-family:var(--font-mono);font-size:11px;color:var(--text-4);margin-top:8px;letter-spacing:.1em;">// KOTLIN MASTERY · COMPLETE GUIDE ✦</div>
+</div>
+</article></div></div>
+
+<button class="back-top" id="backTop" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
+<div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightboxClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg></button><img id="lightboxImg" src="" alt=""></div>
+
+<script>
+const themeBtn=document.getElementById('themeBtn'),moonIcon=document.getElementById('moonIcon'),sunIcon=document.getElementById('sunIcon'),html=document.documentElement;function applyTheme(t){html.setAttribute('data-theme',t);moonIcon.style.display=t==='dark'?'':'none';sunIcon.style.display=t==='dark'?'none':''}let initialTheme='dark';try{const s=localStorage.getItem('page-theme');if(s)initialTheme=s}catch(e){}applyTheme(initialTheme);themeBtn.addEventListener('click',()=>{const n=html.getAttribute('data-theme')==='dark'?'light':'dark';applyTheme(n);try{localStorage.setItem('page-theme',n)}catch(e){}});const sidebarToggle=document.getElementById('sidebarToggle'),sidebarShow=document.getElementById('sidebarShow'),body=document.body;function applySidebar(c){if(c)body.classList.add('sidebar-collapsed');else body.classList.remove('sidebar-collapsed')}let sidebarCollapsed=false;try{sidebarCollapsed=localStorage.getItem('page-sidebar')==='collapsed'}catch(e){}applySidebar(sidebarCollapsed);function toggleSidebar(){const n=!body.classList.contains('sidebar-collapsed');applySidebar(n);try{localStorage.setItem('page-sidebar',n?'collapsed':'open')}catch(e){}}sidebarToggle.addEventListener('click',toggleSidebar);sidebarShow.addEventListener('click',toggleSidebar);document.getElementById('printBtn').addEventListener('click',()=>window.print());const progressBar=document.querySelector('.progress-bar');function updateProgress(){const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight,p=d>0?(s/d)*100:0;progressBar.style.setProperty('--progress',p+'%')}window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();const sections=document.querySelectorAll('.section,.subsection'),tocLinks=document.querySelectorAll('.toc-link');function setActive(id){tocLinks.forEach(l=>{if(l.getAttribute('href')==='#'+id)l.classList.add('active');else l.classList.remove('active')})}const observer=new IntersectionObserver(entries=>{const v=entries.filter(e=>e.isIntersecting);if(v.length>0){v.sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);setActive(v[0].target.id)}},{rootMargin:'-10% 0px -70% 0px',threshold:0});sections.forEach(s=>observer.observe(s));document.querySelectorAll('.copy-btn').forEach(btn=>{btn.addEventListener('click',async()=>{const cb=btn.closest('.code-wrap').querySelector('code');if(!cb)return;const t=cb.innerText;try{await navigator.clipboard.writeText(t)}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta)}const o=btn.innerHTML;btn.classList.add('copied');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Copied';setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML=o},1600)})});const searchInput=document.getElementById('search'),tocItems=document.querySelectorAll('.toc>.toc-item');searchInput.addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();tocItems.forEach(item=>{const t=item.textContent.toLowerCase();if(!q||t.includes(q))item.classList.remove('hidden');else item.classList.add('hidden')})});const backTop=document.getElementById('backTop');window.addEventListener('scroll',()=>{if(window.scrollY>400)backTop.classList.add('visible');else backTop.classList.remove('visible')},{passive:true});backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));const menuBtn=document.getElementById('menuBtn'),sidebar=document.getElementById('sidebar');menuBtn.addEventListener('click',()=>sidebar.classList.toggle('open'));document.querySelectorAll('.toc-link').forEach(l=>{l.addEventListener('click',()=>{if(window.innerWidth<=768)sidebar.classList.remove('open')})});const lightbox=document.getElementById('lightbox'),lightboxImg=document.getElementById('lightboxImg'),lightboxClose=document.getElementById('lightboxClose');function openLightbox(s,a){lightboxImg.src=s;lightboxImg.alt=a||'';lightbox.classList.add('open');document.body.style.overflow='hidden'}function closeLightbox(){lightbox.classList.remove('open');document.body.style.overflow='';setTimeout(()=>{lightboxImg.src=''},200)}document.querySelectorAll('.article img').forEach(img=>{img.addEventListener('click',()=>openLightbox(img.src,img.alt))});lightbox.addEventListener('click',e=>{if(e.target===lightbox||e.target===lightboxClose)closeLightbox()});lightboxClose.addEventListener('click',closeLightbox);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox()});if(window.Prism)Prism.highlightAll();
+</script>
+</body>
+</html>

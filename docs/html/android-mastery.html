@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Android Mastery — Complete Interview Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-kotlin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+<style>
+:root{--bg:#08111c;--bg-grid:#0e1726;--surface:#111b2a;--surface-2:#172233;--surface-3:#1e2d42;--border:#263650;--border-subtle:#1a2a3f;--text:#e8e9ed;--text-2:#b5b9c5;--text-3:#828794;--text-4:#5a5e6b;--primary:#22d3ee;--primary-soft:#67e8f9;--secondary:#a78bfa;--secondary-soft:#c4b5fd;--pop:#f472b6;--green:#34d399;--blue:#60a5fa;--yellow:#fbbf24;--red:#fb7185;--warn-bg:rgba(251,113,133,0.08);--warn-border:rgba(251,113,133,0.3);--tip-bg:rgba(52,211,153,0.06);--tip-border:rgba(52,211,153,0.25);--note-bg:rgba(96,165,250,0.06);--note-border:rgba(96,165,250,0.25);--mistake-bg:rgba(34,211,238,0.06);--mistake-border:rgba(34,211,238,0.28);--def-bg:rgba(167,139,250,0.07);--def-border:rgba(167,139,250,0.3);--code-bg:#0a0b10;--code-border:#1c1f29;--shadow:0 1px 0 rgba(255,255,255,0.04) inset,0 8px 32px rgba(0,0,0,0.5);--shadow-sm:0 1px 0 rgba(255,255,255,0.03) inset,0 2px 8px rgba(0,0,0,0.3);--sidebar-w:320px;--font-display:'Fraunces',Georgia,serif;--font-body:'Geist',-apple-system,sans-serif;--font-mono:'JetBrains Mono','SF Mono',Consolas,monospace}
+[data-theme="light"]{--bg:#f5f8fa;--bg-grid:#eaf0f5;--surface:#ffffff;--surface-2:#f0f4f8;--surface-3:#e2e8f0;--border:#cbd5e1;--border-subtle:#e2e8f0;--text:#1a1a1f;--text-2:#3d4049;--text-3:#6b6e78;--text-4:#9c9fa8;--primary:#0891b2;--primary-soft:#0e7490;--secondary:#7c3aed;--secondary-soft:#6d28d9;--pop:#db2777;--green:#059669;--blue:#2563eb;--yellow:#d97706;--red:#e11d48;--warn-bg:rgba(225,29,72,0.06);--warn-border:rgba(225,29,72,0.25);--tip-bg:rgba(5,150,105,0.05);--tip-border:rgba(5,150,105,0.2);--note-bg:rgba(37,99,235,0.05);--note-border:rgba(37,99,235,0.2);--mistake-bg:rgba(8,145,178,0.05);--mistake-border:rgba(8,145,178,0.25);--def-bg:rgba(124,58,237,0.06);--def-border:rgba(124,58,237,0.25);--code-bg:#1e293b;--code-border:#334155;--shadow:0 1px 0 rgba(255,255,255,0.6) inset,0 4px 20px rgba(0,0,0,0.06);--shadow-sm:0 1px 0 rgba(255,255,255,0.5) inset,0 1px 4px rgba(0,0,0,0.04)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:30px}body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.65;font-size:15.5px;-webkit-font-smoothing:antialiased;background-image:radial-gradient(circle at 20% 10%,color-mix(in srgb,var(--primary) 8%,transparent),transparent 40%),radial-gradient(circle at 80% 80%,color-mix(in srgb,var(--secondary) 8%,transparent),transparent 40%),linear-gradient(var(--bg-grid) 1px,transparent 1px),linear-gradient(90deg,var(--bg-grid) 1px,transparent 1px);background-size:auto,auto,32px 32px,32px 32px;min-height:100vh}::selection{background:var(--primary);color:var(--bg)}
+.progress-bar{position:fixed;top:0;left:0;right:0;height:3px;z-index:1000}.progress-bar::before{content:'';display:block;height:100%;width:var(--progress,0%);background:linear-gradient(90deg,var(--primary),var(--pop),var(--secondary));transition:width .1s ease-out}.layout{display:grid;grid-template-columns:var(--sidebar-w) 1fr;max-width:1500px;margin:0 auto;min-height:100vh;transition:grid-template-columns .3s cubic-bezier(.4,0,.2,1)}body.sidebar-collapsed .layout{grid-template-columns:0 1fr}.sidebar{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;border-right:1px solid var(--border-subtle);background:linear-gradient(180deg,var(--bg),transparent 200px);transition:opacity .3s ease,transform .3s ease}.sidebar-inner{padding:24px 28px 32px 32px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:var(--border) transparent}.sidebar-inner::-webkit-scrollbar{width:6px}.sidebar-inner::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}body.sidebar-collapsed .sidebar{opacity:0;pointer-events:none}.brand-row{display:flex;align-items:center;justify-content:space-between;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--border-subtle);gap:8px}.brand{display:flex;align-items:center;gap:12px;flex:1;min-width:0}.brand-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--primary),var(--pop) 50%,var(--secondary));border-radius:10px;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;color:#0c0d12;font-size:18px;font-style:italic;box-shadow:0 4px 12px color-mix(in srgb,var(--primary) 25%,transparent);flex-shrink:0}.brand-text{display:flex;flex-direction:column;min-width:0}.brand-title{font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-sub{font-size:11px;color:var(--text-3);letter-spacing:.05em;text-transform:uppercase;margin-top:2px}.sidebar-toggle{width:28px;height:28px;background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--text-3);cursor:pointer;display:grid;place-items:center;transition:all .15s;flex-shrink:0}.sidebar-toggle:hover{color:var(--primary);border-color:var(--primary)}.sidebar-toggle svg{width:14px;height:14px}.search-wrap{position:relative;margin-bottom:20px}.search-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 12px 9px 34px;color:var(--text);font-family:var(--font-body);font-size:13px;outline:none;transition:border-color .15s}.search-input:focus{border-color:var(--primary);background:var(--surface-2)}.search-input::placeholder{color:var(--text-4)}.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-4);pointer-events:none}.nav-label{font-family:var(--font-mono);font-size:10px;color:var(--text-4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;padding-left:12px}.toc{list-style:none}.toc-item{margin:1px 0}.toc-link{display:flex;align-items:baseline;gap:10px;padding:7px 10px 7px 12px;border-radius:6px;color:var(--text-2);text-decoration:none;font-size:13.5px;border-left:2px solid transparent;margin-left:-2px;transition:all .15s ease;line-height:1.4}.toc-link:hover{color:var(--text);background:var(--surface)}.toc-link.active{color:var(--primary);background:linear-gradient(90deg,color-mix(in srgb,var(--primary) 8%,transparent),transparent);border-left-color:var(--primary);font-weight:500}.toc-num{font-family:var(--font-mono);font-size:11px;color:var(--text-4);font-weight:500;min-width:18px}.toc-link.active .toc-num{color:var(--primary)}.toc-sub{list-style:none;margin-left:20px;padding-left:12px;border-left:1px dashed var(--border);margin-top:2px;margin-bottom:4px}.toc-sub .toc-link{padding:4px 10px;font-size:12.5px}.toc-item.hidden{display:none}.main{padding:0;min-width:0}.main-header{display:flex;align-items:center;justify-content:space-between;padding:18px 56px;border-bottom:1px solid var(--border-subtle);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(20px);z-index:50}.crumb{font-size:12px;color:var(--text-3);font-family:var(--font-mono);letter-spacing:.05em}.crumb span{color:var(--primary)}.actions{display:flex;gap:8px;align-items:center}.icon-btn{width:36px;height:36px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text-2);cursor:pointer;display:grid;place-items:center;transition:all .15s}.icon-btn:hover{background:var(--surface-2);color:var(--text)}.icon-btn svg{width:16px;height:16px}.sidebar-show{display:none}body.sidebar-collapsed .sidebar-show{display:grid}
+.hero{padding:80px 56px 64px;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,color-mix(in srgb,var(--primary) 8%,transparent),transparent 70%);pointer-events:none}.hero::after{content:'';position:absolute;bottom:-100px;left:-50px;width:350px;height:350px;background:radial-gradient(circle,color-mix(in srgb,var(--secondary) 8%,transparent),transparent 70%);pointer-events:none}.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;color:var(--primary);letter-spacing:.1em;text-transform:uppercase;background:color-mix(in srgb,var(--primary) 8%,transparent);padding:6px 12px;border-radius:100px;border:1px solid color-mix(in srgb,var(--primary) 20%,transparent);margin-bottom:24px}.hero-tag::before{content:'';width:6px;height:6px;background:var(--primary);border-radius:50%;box-shadow:0 0 10px var(--primary)}.hero h1{font-family:var(--font-display);font-size:clamp(36px,6vw,64px);font-weight:600;letter-spacing:-.025em;line-height:1.02;margin-bottom:24px}.hero h1 em{font-style:italic;font-weight:500;background:linear-gradient(135deg,var(--primary),var(--pop) 60%,var(--secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}.hero-sub{font-size:18px;color:var(--text-2);max-width:640px;line-height:1.55}.hero-meta{display:flex;gap:24px;margin-top:40px;flex-wrap:wrap;padding-top:28px;border-top:1px solid var(--border-subtle)}.hero-meta-item{display:flex;flex-direction:column;gap:4px}.hero-meta-label{font-family:var(--font-mono);font-size:10px;color:var(--text-4);letter-spacing:.1em;text-transform:uppercase}.hero-meta-value{font-family:var(--font-display);font-size:22px;font-weight:500}.hero-meta-value em{font-style:italic;color:var(--primary)}
+.article{padding:0 56px 120px;max-width:920px}.section{margin-top:80px;scroll-margin-top:30px;animation:fadeUp .5s ease both}.section:first-child{margin-top:0}.section-header{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border-subtle)}.section-num{font-family:var(--font-mono);font-size:12px;color:var(--primary);font-weight:500;letter-spacing:.1em;margin-bottom:8px;display:block}.section h2{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);font-weight:500;letter-spacing:-.02em;line-height:1.1}.section h2 em{font-style:italic;color:var(--secondary)}.article h4{font-family:var(--font-body);font-size:17px;font-weight:600;color:var(--text);margin-top:32px;margin-bottom:12px}.article p{color:var(--text-2);margin-bottom:16px;line-height:1.7}.article p strong{color:var(--text);font-weight:600}.article p em{color:var(--primary-soft);font-style:italic}.article a{color:var(--primary);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--primary) 30%,transparent)}.article ul,.article ol{margin:12px 0 20px;padding-left:24px;color:var(--text-2)}.article ul li,.article ol li{margin-bottom:8px;padding-left:4px;line-height:1.65}.article ul li::marker{color:var(--primary)}.article ol li::marker{color:var(--secondary);font-family:var(--font-mono)}.article code:not(pre code){font-family:var(--font-mono);font-size:.88em;background:var(--surface-2);color:var(--primary-soft);padding:2px 7px;border-radius:5px;border:1px solid var(--border-subtle);white-space:nowrap}
+.code-wrap{margin:20px 0 24px;border-radius:12px;background:var(--code-bg);border:1px solid var(--code-border);overflow:hidden;box-shadow:var(--shadow)}.code-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);border-bottom:1px solid var(--code-border)}.code-dots{display:flex;gap:6px}.code-dot{width:10px;height:10px;border-radius:50%}.code-dot:nth-child(1){background:#ff5f57}.code-dot:nth-child(2){background:#febc2e}.code-dot:nth-child(3){background:#28c840}.code-lang{font-family:var(--font-mono);font-size:11px;color:#828794;letter-spacing:.05em;text-transform:uppercase;margin-left:16px}.copy-btn{background:transparent;border:1px solid #2a2e3c;color:#b5b9c5;padding:4px 10px;border-radius:6px;font-family:var(--font-mono);font-size:11px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}.copy-btn:hover{color:var(--primary);border-color:var(--primary)}.copy-btn.copied{color:var(--green);border-color:var(--green)}.copy-btn svg{width:12px;height:12px}pre{margin:0;padding:20px 24px;overflow-x:auto;font-family:var(--font-mono);font-size:13.5px;line-height:1.65;background:var(--code-bg)!important;color:#e8e9ed;scrollbar-width:thin;scrollbar-color:#2a2e3c transparent}pre code{font-family:var(--font-mono)!important;background:transparent!important}.token.keyword{color:#ff7eb6;font-weight:500}.token.function{color:#79c0ff}.token.string{color:#7ee787}.token.number{color:#ffd866}.token.comment{color:#5a5e6b;font-style:italic}.token.class-name{color:#ffd866}.token.operator{color:#b388ff}.token.punctuation{color:#828794}.token.boolean{color:#b388ff}.token.builtin{color:#79c0ff}.token.annotation,.token.decorator{color:#ff8a3d}.token.property{color:#79c0ff}.token.tag{color:#ff7eb6}.token.attr-name{color:#ffd866}.token.attr-value{color:#7ee787}
+.callout{margin:24px 0;padding:18px 22px;border-radius:10px;border-left:3px solid;font-size:14.5px;line-height:1.65}.callout-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}.callout-label svg{width:14px;height:14px}.callout p{margin-bottom:0;color:var(--text-2)}.callout p+p{margin-top:10px}.callout.mistake{background:var(--mistake-bg);border-left-color:var(--primary)}.callout.mistake .callout-label{color:var(--primary)}.callout.warn{background:var(--warn-bg);border-left-color:var(--red)}.callout.warn .callout-label{color:var(--red)}.callout.tip{background:var(--tip-bg);border-left-color:var(--green)}.callout.tip .callout-label{color:var(--green)}.callout.note{background:var(--note-bg);border-left-color:var(--blue)}.callout.note .callout-label{color:var(--blue)}.callout.def{background:var(--def-bg);border-left-color:var(--secondary)}.callout.def .callout-label{color:var(--secondary)}
+.table-wrap{margin:20px 0 28px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow-sm)}table{width:100%;border-collapse:collapse;font-size:14px}thead{background:var(--surface-2);border-bottom:1px solid var(--border)}th{text-align:left;padding:12px 18px;font-family:var(--font-mono);font-size:11px;color:var(--text-3);font-weight:600;letter-spacing:.08em;text-transform:uppercase}td{padding:12px 18px;color:var(--text-2);border-top:1px solid var(--border-subtle);vertical-align:top}td:first-child{color:var(--text);font-weight:500}td code{font-size:.88em!important}
+.tag-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}.tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;padding:4px 10px;border-radius:100px;border:1px solid;letter-spacing:.02em}.tag.t-primary{color:var(--primary);border-color:color-mix(in srgb,var(--primary) 30%,transparent);background:color-mix(in srgb,var(--primary) 6%,transparent)}.tag.t-secondary{color:var(--secondary);border-color:color-mix(in srgb,var(--secondary) 30%,transparent);background:color-mix(in srgb,var(--secondary) 6%,transparent)}.tag.t-green{color:var(--green);border-color:color-mix(in srgb,var(--green) 25%,transparent);background:color-mix(in srgb,var(--green) 5%,transparent)}.tag.t-pop{color:var(--pop);border-color:color-mix(in srgb,var(--pop) 30%,transparent);background:color-mix(in srgb,var(--pop) 6%,transparent)}
+.divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:60px 0;color:var(--text-4)}.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}.divider span{font-family:var(--font-display);font-style:italic;font-size:18px;color:var(--text-3)}
+.back-top{position:fixed;bottom:32px;right:32px;width:44px;height:44px;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text-2);cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transition:all .25s;z-index:100;box-shadow:var(--shadow)}.back-top.visible{opacity:1;visibility:visible}.back-top:hover{background:var(--primary);color:var(--bg);border-color:var(--primary);transform:translateY(-2px)}.back-top svg{width:18px;height:18px}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:9999;padding:40px;cursor:zoom-out;backdrop-filter:blur(8px);animation:fadeIn .2s ease}.lightbox.open{display:flex}.lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.6);cursor:zoom-out;animation:zoomIn .25s ease}.lightbox-close{position:absolute;top:24px;right:24px;width:40px;height:40px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:50%;color:white;cursor:pointer;display:grid;place-items:center;transition:all .15s}.lightbox-close:hover{background:rgba(255,255,255,.2);transform:rotate(90deg)}.lightbox-close svg{width:18px;height:18px}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes zoomIn{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}.menu-btn{display:none}@media(max-width:1100px){:root{--sidebar-w:280px}.hero{padding:60px 40px 48px}.article{padding:0 40px 100px}.main-header{padding:16px 40px}}@media(max-width:768px){.layout{grid-template-columns:1fr}body.sidebar-collapsed .layout{grid-template-columns:1fr}.sidebar{position:fixed;top:0;left:0;width:280px;z-index:200;transform:translateX(-100%);background:var(--bg);border-right:1px solid var(--border);opacity:1!important;pointer-events:auto!important}.sidebar.open{transform:translateX(0)}.sidebar-toggle{display:none}.sidebar-show{display:none!important}.menu-btn{display:grid}.hero{padding:48px 24px 40px}.hero h1{font-size:38px}.article{padding:0 24px 80px}.main-header{padding:14px 24px}.section{margin-top:64px}}@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media print{:root,[data-theme="dark"],[data-theme="light"]{--bg:#fff!important;--text:#000!important;--text-2:#1a1a1a!important;--surface:#fff!important;--code-bg:#f5f5f5!important}body{background:white!important;background-image:none!important}.progress-bar,.sidebar,.main-header,.back-top,.copy-btn,.code-dots,.menu-btn,.sidebar-toggle,.sidebar-show,.icon-btn,.lightbox{display:none!important}.layout{display:block!important}.main,.article{padding:0!important;max-width:none!important}.hero{padding:0 0 24pt!important;border-bottom:2pt solid black}.hero::before,.hero::after{display:none!important}.hero h1{font-size:28pt!important;color:black!important}.hero h1 em{-webkit-text-fill-color:black!important;background:none!important}.section{margin-top:24pt;animation:none!important}.code-wrap{box-shadow:none!important;page-break-inside:avoid}.callout{page-break-inside:avoid}}
+.star{color:var(--secondary);font-size:1.1em}
+</style>
+</head>
+<body>
+<div class="progress-bar"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar"><div class="sidebar-inner">
+<div class="brand-row"><div class="brand"><div class="brand-mark">A</div><div class="brand-text"><div class="brand-title">Android Mastery</div><div class="brand-sub">Senior Dev · Interview Guide</div></div></div><button class="sidebar-toggle" id="sidebarToggle" aria-label="Collapse sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"/></svg></button></div>
+<div class="search-wrap"><svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input type="search" class="search-input" id="search" placeholder="Filter sections…"></div>
+<div class="nav-label">Index</div>
+<nav><ul class="toc">
+<li class="toc-item"><a href="#s1" class="toc-link"><span class="toc-num">01</span><span>Activity Lifecycle</span></a></li>
+<li class="toc-item"><a href="#s2" class="toc-link"><span class="toc-num">02</span><span>ViewModel</span></a></li>
+<li class="toc-item"><a href="#s3" class="toc-link"><span class="toc-num">03</span><span>Compose State</span></a></li>
+<li class="toc-item"><a href="#s4" class="toc-link"><span class="toc-num">04</span><span>Compose Side Effects</span></a></li>
+<li class="toc-item"><a href="#s5" class="toc-link"><span class="toc-num">05</span><span>Lists &amp; Performance</span></a></li>
+<li class="toc-item"><a href="#s6" class="toc-link"><span class="toc-num">06</span><span>Architecture</span></a></li>
+<li class="toc-item"><a href="#s7" class="toc-link"><span class="toc-num">07</span><span>Hilt DI</span></a></li>
+<li class="toc-item"><a href="#s8" class="toc-link"><span class="toc-num">08</span><span>Navigation</span></a></li>
+<li class="toc-item"><a href="#s9" class="toc-link"><span class="toc-num">09</span><span>Networking</span></a></li>
+<li class="toc-item"><a href="#s10" class="toc-link"><span class="toc-num">10</span><span>Storage</span></a></li>
+<li class="toc-item"><a href="#s11" class="toc-link"><span class="toc-num">11</span><span>Concurrency</span></a></li>
+<li class="toc-item"><a href="#s12" class="toc-link"><span class="toc-num">12</span><span>Testing</span></a></li>
+<li class="toc-item"><a href="#s13" class="toc-link"><span class="toc-num">13</span><span>Interview Q&amp;A</span></a></li>
+</ul></nav>
+</div></aside>
+
+<div class="main">
+<header class="main-header">
+<div style="display:flex;align-items:center;gap:14px;">
+<button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<button class="icon-btn sidebar-show" id="sidebarShow" aria-label="Show sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg></button>
+<div class="crumb"><span>// </span>android / mastery / senior-guide</div>
+</div>
+<div class="actions">
+<button class="icon-btn" id="printBtn" aria-label="Print"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></button>
+<button class="icon-btn" id="themeBtn" aria-label="Toggle theme"><svg id="moonIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></button>
+</div>
+</header>
+
+<section class="hero">
+<span class="hero-tag">Reference · Android · Jetpack Compose</span>
+<h1>The Complete <em>Android</em> Mastery Guide</h1>
+<p class="hero-sub">Architecture, Compose, Lifecycle, and everything a Senior Android Developer needs to know. With code examples and 30+ interview Q&amp;A.</p>
+<div class="hero-meta">
+<div class="hero-meta-item"><div class="hero-meta-label">Sections</div><div class="hero-meta-value"><em>13</em></div></div>
+<div class="hero-meta-item"><div class="hero-meta-label">Code Examples</div><div class="hero-meta-value"><em>70+</em></div></div>
+<div class="hero-meta-item"><div class="hero-meta-label">Interview Q&amp;A</div><div class="hero-meta-value"><em>30+</em></div></div>
+<div class="hero-meta-item"><div class="hero-meta-label">Read Time</div><div class="hero-meta-value"><em>~55m</em></div></div>
+</div>
+</section>
+
+<article class="article">
+
+<!-- S1 -->
+<section class="section" id="s1">
+<header class="section-header"><span class="section-num">01 / Lifecycle</span><h2>Activity &amp; Fragment <em>Lifecycle</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">Activity</span><span class="tag t-secondary">Fragment</span><span class="tag t-green">Config Changes</span></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Scenario</th><th>Activity Callbacks</th><th>ViewModel</th><th>SavedStateHandle</th></tr></thead>
+<tbody>
+<tr><td>Rotation</td><td>onPause→onStop→onDestroy→onCreate→onStart→onResume</td><td>Survives</td><td>Survives</td></tr>
+<tr><td>Back press</td><td>onPause→onStop→onDestroy (finish)</td><td>Cleared</td><td>Gone</td></tr>
+<tr><td>Process death</td><td>Destroyed (system kills)</td><td>Gone</td><td>Survives</td></tr>
+<tr><td>Home + return</td><td>onPause→onStop ... onStart→onResume</td><td>Survives</td><td>Survives</td></tr>
+</tbody>
+</table></div>
+<div class="callout warn"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M4.93 19.07A10 10 0 1 1 19.07 4.93 10 10 0 0 1 4.93 19.07z"/></svg>Warning</div>
+<p><strong>Common trick question:</strong> "Can a ViewModel hold a reference to an Activity/Context?" → NO. ViewModel outlives Activity on rotation → memory leak. Use <code>ApplicationContext</code> via <code>AndroidViewModel</code> only if absolutely necessary.</p></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S2 -->
+<section class="section" id="s2">
+<header class="section-header"><span class="section-num">02 / ViewModel</span><h2>Surviving Config <em>Changes</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">StateFlow</span><span class="tag t-secondary">SavedStateHandle</span></div>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · ViewModel</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">@HiltViewModel
+class MyViewModel @Inject constructor(
+    private val repository: MyRepository,
+    private val savedStateHandle: SavedStateHandle // survives process death
+) : ViewModel() {
+
+    private val _uiState = MutableStateFlow&lt;UiState&gt;(UiState.Loading)
+    val uiState: StateFlow&lt;UiState&gt; = _uiState.asStateFlow()
+
+    // SavedStateHandle — survives process death (small data only)
+    val searchQuery = savedStateHandle.getStateFlow("query", "")
+
+    fun onAction(action: Action) {
+        viewModelScope.launch { // auto-cancelled on onCleared()
+            when (action) {
+                is Action.Refresh -&gt; loadData()
+                is Action.Search -&gt; savedStateHandle["query"] = action.query
+            }
+        }
+    }
+}</code></pre></div>
+<div class="callout tip"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.7 1.5 5 4 6.3V18h6v-2.7c2.5-1.3 4-3.6 4-6.3a7 7 0 0 0-7-7z"/></svg>Tip</div>
+<p>Use <code>SavedStateHandle</code> for: search queries, scroll position, selected tab, form input. Do NOT use for: network responses, large data — use Repository/cache instead.</p></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S3 -->
+<section class="section" id="s3">
+<header class="section-header"><span class="section-num">03 / Compose</span><h2>State <em>Management</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">remember</span><span class="tag t-secondary">rememberSaveable</span><span class="tag t-pop">derivedStateOf</span></div>
+<div class="table-wrap"><table>
+<thead><tr><th>API</th><th>Survives Recomposition</th><th>Survives Config Change</th><th>Survives Process Death</th></tr></thead>
+<tbody>
+<tr><td><code>remember</code></td><td>Yes</td><td>No</td><td>No</td></tr>
+<tr><td><code>rememberSaveable</code></td><td>Yes</td><td>Yes</td><td>No*</td></tr>
+<tr><td><code>SavedStateHandle</code></td><td>N/A (ViewModel)</td><td>Yes</td><td>Yes</td></tr>
+</tbody>
+</table></div>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · State Hoisting</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// State hoisting: stateful wrapper → stateless component
+@Composable
+fun CounterScreen() {
+    var count by rememberSaveable { mutableStateOf(0) }
+    // State flows DOWN, events flow UP
+    StatelessCounter(count = count, onIncrement = { count++ })
+}
+
+@Composable
+fun StatelessCounter(count: Int, onIncrement: () -&gt; Unit) {
+    Button(onClick = onIncrement) { Text("Count: $count") }
+}
+
+// Collecting ViewModel state — THE correct way
+val uiState by viewModel.uiState.collectAsStateWithLifecycle()</code></pre></div>
+<div class="callout mistake"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>Common Mistake</div>
+<p>Using <code>collectAsState()</code> instead of <code>collectAsStateWithLifecycle()</code>. The former keeps collecting when the app is backgrounded — wasting resources and risking crashes from invisible UI updates.</p></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S4 -->
+<section class="section" id="s4">
+<header class="section-header"><span class="section-num">04 / Side Effects</span><h2>Compose <em>Effects</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">LaunchedEffect</span><span class="tag t-secondary">DisposableEffect</span><span class="tag t-green">SideEffect</span></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Effect</th><th>When It Runs</th><th>Cancelled When</th><th>Use Case</th></tr></thead>
+<tbody>
+<tr><td><code>LaunchedEffect(key)</code></td><td>On enter + when key changes</td><td>Key changes or leaves composition</td><td>API calls, one-time init, navigation</td></tr>
+<tr><td><code>DisposableEffect(key)</code></td><td>On enter + when key changes</td><td>Key changes or leaves (calls onDispose)</td><td>Listeners, observers, callbacks</td></tr>
+<tr><td><code>SideEffect</code></td><td>After every successful recomposition</td><td>Never (non-suspend)</td><td>Sync state to external systems</td></tr>
+<tr><td><code>rememberCoroutineScope</code></td><td>Manual (from callbacks)</td><td>When composable leaves</td><td>onClick handlers, user events</td></tr>
+<tr><td><code>rememberUpdatedState</code></td><td>Captures latest value</td><td>N/A (just holds reference)</td><td>Long-lived effects referencing changing params</td></tr>
+</tbody>
+</table></div>
+<div class="callout tip"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.7 1.5 5 4 6.3V18h6v-2.7c2.5-1.3 4-3.6 4-6.3a7 7 0 0 0-7-7z"/></svg>Tip</div>
+<p><strong>LaunchedEffect vs rememberCoroutineScope:</strong> LaunchedEffect for composition lifecycle (auto-run on enter). rememberCoroutineScope for user events (button clicks, gestures). Never use LaunchedEffect for click handlers.</p></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S5 -->
+<section class="section" id="s5">
+<header class="section-header"><span class="section-num">05 / Performance</span><h2>Lists &amp; <em>Stability</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">LazyColumn</span><span class="tag t-secondary">@Stable</span><span class="tag t-pop">Modifier</span></div>
+<p><strong>LazyColumn performance rules:</strong></p>
+<ol>
+<li><strong>Always provide <code>key</code></strong> — enables correct diffing and state preservation across reorder</li>
+<li><strong>Use <code>contentType</code></strong> — Compose reuses compositions between same-type items (huge win for mixed lists)</li>
+<li><strong>Keep items @Stable</strong> — use immutable data classes, <code>@Immutable</code> annotation</li>
+<li><strong>Modifier order matters!</strong> — <code>.clickable{}.padding(16.dp)</code> ≠ <code>.padding(16.dp).clickable{}</code></li>
+<li><strong>Use <code>derivedStateOf</code></strong> for scroll-dependent state (show/hide FAB)</li>
+</ol>
+<div class="callout warn"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M4.93 19.07A10 10 0 1 1 19.07 4.93 10 10 0 0 1 4.93 19.07z"/></svg>Warning</div>
+<p><strong>Never nest LazyColumn inside LazyColumn.</strong> Use nested <code>items()</code> calls or sections within a single LazyColumn instead.</p></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S6 -->
+<section class="section" id="s6">
+<header class="section-header"><span class="section-num">06 / Architecture</span><h2>MVVM + <em>Clean</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">MVVM</span><span class="tag t-secondary">Repository</span><span class="tag t-green">UDF</span></div>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Architecture Flow</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// Clean Architecture layers:
+// Presentation (UI + ViewModel) → Domain (UseCases) → Data (Repository + API/DB)
+//
+// UDF: state flows DOWN, events flow UP
+// UI ──(Action)──→ ViewModel ──→ UseCase ──→ Repository
+// UI ←──(State)─── ViewModel ←── UseCase ←── Repository
+
+// Sealed interface for UI State
+sealed interface UiState&lt;out T&gt; {
+    data object Loading : UiState&lt;Nothing&gt;
+    data class Success&lt;T&gt;(val data: T) : UiState&lt;T&gt;
+    data class Error(val msg: String) : UiState&lt;Nothing&gt;
+}
+
+// Use Case with operator invoke
+class GetArticlesUseCase @Inject constructor(
+    private val repo: ArticleRepository
+) {
+    operator fun invoke(): Flow&lt;List&lt;Article&gt;&gt; = repo.observeArticles()
+}</code></pre></div>
+<div class="callout note"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Note</div>
+<p><strong>Use Cases are OPTIONAL.</strong> Google's official guidance says skip them if they're just pass-through. Add them when: business logic exists, multiple repos need coordination, or logic is shared across ViewModels.</p></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S7 -->
+<section class="section" id="s7">
+<header class="section-header"><span class="section-num">07 / DI</span><h2>Hilt <em>Dependency Injection</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">@Provides</span><span class="tag t-secondary">@Binds</span><span class="tag t-green">Scopes</span></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Annotation</th><th>Used For</th><th>Module Type</th><th>Performance</th></tr></thead>
+<tbody>
+<tr><td><code>@Provides</code></td><td>Types you DON'T own (Retrofit, OkHttp, Room)</td><td><code>object</code></td><td>Generates factory class</td></tr>
+<tr><td><code>@Binds</code></td><td>Types you DO own (interface → impl)</td><td><code>abstract class</code></td><td>More efficient (no factory)</td></tr>
+</tbody>
+</table></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Component</th><th>Scope</th><th>Lifetime</th></tr></thead>
+<tbody>
+<tr><td>SingletonComponent</td><td>@Singleton</td><td>Application</td></tr>
+<tr><td>ViewModelComponent</td><td>@ViewModelScoped</td><td>ViewModel</td></tr>
+<tr><td>ActivityComponent</td><td>@ActivityScoped</td><td>Activity</td></tr>
+<tr><td>FragmentComponent</td><td>@FragmentScoped</td><td>Fragment</td></tr>
+</tbody>
+</table></div>
+<div class="callout tip"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.7 1.5 5 4 6.3V18h6v-2.7c2.5-1.3 4-3.6 4-6.3a7 7 0 0 0-7-7z"/></svg>Tip</div>
+<p><strong>Inject Dispatchers for testability:</strong> Create <code>@IoDispatcher</code>, <code>@DefaultDispatcher</code> qualifiers. In tests, swap with TestDispatcher. Without this, you can't test main-safety.</p></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S8 -->
+<section class="section" id="s8">
+<header class="section-header"><span class="section-num">08 / Navigation</span><h2>Type-Safe <em>Routes</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">NavHost</span><span class="tag t-secondary">Arguments</span><span class="tag t-pop">Deep Links</span></div>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Navigation</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// popUpTo with inclusive — Login → Home (clear login)
+navController.navigate("home") {
+    popUpTo("login") { inclusive = true } // removes login from stack
+    launchSingleTop = true               // no duplicate home
+}
+
+// Scoped ViewModel to nav graph
+val sharedVM = hiltViewModel&lt;SharedViewModel&gt;(
+    navController.getBackStackEntry("settings_graph")
+)</code></pre></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S9 -->
+<section class="section" id="s9">
+<header class="section-header"><span class="section-num">09 / Networking</span><h2>Retrofit + <em>OkHttp</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">Retrofit</span><span class="tag t-secondary">Interceptors</span><span class="tag t-green">Error Handling</span></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Type</th><th>Application Interceptor</th><th>Network Interceptor</th></tr></thead>
+<tbody>
+<tr><td>Runs</td><td>ONCE per request</td><td>EVERY request (including redirects)</td></tr>
+<tr><td>Sees</td><td>Original request</td><td>Actual network request</td></tr>
+<tr><td>Use for</td><td>Auth headers, logging, retry</td><td>Caching, compression</td></tr>
+<tr><td>Add via</td><td><code>.addInterceptor()</code></td><td><code>.addNetworkInterceptor()</code></td></tr>
+</tbody>
+</table></div>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Safe API Call</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">sealed class NetworkResult&lt;out T&gt; {
+    data class Success&lt;T&gt;(val data: T) : NetworkResult&lt;T&gt;()
+    data class Error(val code: Int, val msg: String) : NetworkResult&lt;Nothing&gt;()
+    data class Exception(val e: Throwable) : NetworkResult&lt;Nothing&gt;()
+}
+
+suspend fun &lt;T&gt; safeApiCall(call: suspend () -&gt; Response&lt;T&gt;): NetworkResult&lt;T&gt; {
+    return try {
+        val response = call()
+        if (response.isSuccessful) NetworkResult.Success(response.body()!!)
+        else NetworkResult.Error(response.code(), response.message())
+    } catch (e: IOException) { NetworkResult.Exception(e) }
+}</code></pre></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S10 -->
+<section class="section" id="s10">
+<header class="section-header"><span class="section-num">10 / Storage</span><h2>Room + <em>DataStore</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">Room</span><span class="tag t-secondary">DataStore</span><span class="tag t-green">Migrations</span></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Feature</th><th>SharedPreferences</th><th>DataStore</th></tr></thead>
+<tbody>
+<tr><td>API</td><td>Synchronous (blocks UI)</td><td>Flow + suspend (async)</td></tr>
+<tr><td>Thread safety</td><td>Can cause ANR</td><td>Safe on any thread</td></tr>
+<tr><td>Type safety</td><td>String keys</td><td>Typed keys</td></tr>
+<tr><td>Writes</td><td>Not transactional</td><td>Atomic (edit {})</td></tr>
+<tr><td>Error handling</td><td>Runtime exceptions</td><td>Flow catch {}</td></tr>
+</tbody>
+</table></div>
+<div class="callout tip"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-7 7c0 2.7 1.5 5 4 6.3V18h6v-2.7c2.5-1.3 4-3.6 4-6.3a7 7 0 0 0-7-7z"/></svg>Tip</div>
+<p><strong>Room + Flow:</strong> Room DAO returning <code>Flow&lt;List&lt;T&gt;&gt;</code> auto-emits new data whenever the underlying table changes. No manual refresh needed — truly reactive. Pair with <code>collectAsStateWithLifecycle()</code> in Compose.</p></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S11 -->
+<section class="section" id="s11">
+<header class="section-header"><span class="section-num">11 / Concurrency</span><h2>Coroutines in <em>Android</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">viewModelScope</span><span class="tag t-secondary">WorkManager</span><span class="tag t-green">Main Safety</span></div>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · Lifecycle-Aware Collection</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">// In Compose: collectAsStateWithLifecycle handles it
+val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+// In Fragment/Activity:
+lifecycleScope.launch {
+    repeatOnLifecycle(Lifecycle.State.STARTED) {
+        viewModel.uiState.collect { state -&gt; updateUI(state) }
+    }
+    // Stops collecting when lifecycle goes below STARTED
+}</code></pre></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Tool</th><th>Use When</th><th>Lifetime</th></tr></thead>
+<tbody>
+<tr><td><code>viewModelScope</code></td><td>UI-driven async work (API calls, DB queries)</td><td>ViewModel</td></tr>
+<tr><td><code>lifecycleScope</code></td><td>UI updates, lifecycle-aware collection</td><td>Activity/Fragment</td></tr>
+<tr><td>WorkManager</td><td>Guaranteed background work (sync, upload)</td><td>Survives process death</td></tr>
+<tr><td>Foreground Service</td><td>User-visible long-running (music, GPS)</td><td>Service lifetime</td></tr>
+</tbody>
+</table></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S12 -->
+<section class="section" id="s12">
+<header class="section-header"><span class="section-num">12 / Testing</span><h2>Unit &amp; <em>UI Tests</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">JUnit5</span><span class="tag t-secondary">Turbine</span><span class="tag t-green">Fakes</span></div>
+<div class="code-wrap"><div class="code-header"><div style="display:flex;align-items:center;"><div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div><span class="code-lang">Kotlin · ViewModel Test</span></div><button class="copy-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button></div>
+<pre><code class="language-kotlin">@OptIn(ExperimentalCoroutinesApi::class)
+class MyViewModelTest {
+    private val testDispatcher = UnconfinedTestDispatcher()
+
+    @BeforeEach fun setup() { Dispatchers.setMain(testDispatcher) }
+    @AfterEach fun tearDown() { Dispatchers.resetMain() }
+
+    @Test
+    fun `refresh shows success`() = runTest {
+        val vm = MyViewModel(FakeRepository())
+        vm.uiState.test { // Turbine
+            assertThat(awaitItem()).isInstanceOf(UiState.Loading::class)
+            vm.onAction(Action.Refresh)
+            assertThat(awaitItem()).isInstanceOf(UiState.Success::class)
+        }
+    }
+}</code></pre></div>
+<div class="callout def"><div class="callout-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Definition</div>
+<p><strong>Fake vs Mock:</strong> Fake = real implementation with simplified logic (reusable, catches contract bugs). Mock = framework stub (per-test setup, only verifies what you specify). Prefer Fakes for repositories, Mocks for third-party dependencies.</p></div>
+</section>
+<div class="divider"><span>✦</span></div>
+
+<!-- S13 -->
+<section class="section" id="s13">
+<header class="section-header"><span class="section-num">13 / Interview</span><h2>Q&amp;A with <em>Answers</em></h2></header>
+<div class="tag-row"><span class="tag t-primary">Must-Know</span><span class="tag t-secondary">Senior Level</span></div>
+<div class="table-wrap"><table>
+<thead><tr><th>#</th><th>Question</th><th>Answer</th></tr></thead>
+<tbody>
+<tr><td><span class="star">⭐</span>1</td><td>What happens on rotation?</td><td>Activity destroyed + recreated. ViewModel survives (held by ViewModelStore). SavedStateHandle survives. Composables recompose.</td></tr>
+<tr><td><span class="star">⭐</span>2</td><td>remember vs rememberSaveable?</td><td>remember: survives recomposition. rememberSaveable: + config changes (Bundle). Neither survives process death.</td></tr>
+<tr><td><span class="star">⭐</span>3</td><td>collectAsStateWithLifecycle?</td><td>Stops collecting when lifecycle &lt; STARTED. Prevents wasted work and crashes while backgrounded. Always use instead of collectAsState.</td></tr>
+<tr><td><span class="star">⭐</span>4</td><td>MVVM vs MVI?</td><td>MVVM: multiple state flows, simpler. MVI: single state object, better for complex state. Default to MVVM; use MVI when state interactions are complex.</td></tr>
+<tr><td><span class="star">⭐</span>5</td><td>@Provides vs @Binds?</td><td>@Provides for types you don't own (Retrofit). @Binds for interface→impl (more efficient, no factory class). @Provides needs object module, @Binds needs abstract class.</td></tr>
+<tr><td><span class="star">⭐</span>6</td><td>LaunchedEffect vs rememberCoroutineScope?</td><td>LaunchedEffect: auto-runs on composition/key change (lifecycle-driven). rememberCoroutineScope: for user events (clicks). Never use LaunchedEffect for click handlers.</td></tr>
+<tr><td>7</td><td>Room Flow queries?</td><td>Auto-emit when table changes. No manual refresh. Suspend for writes, Flow for reads. @Transaction for atomic multi-ops.</td></tr>
+<tr><td>8</td><td>viewModelScope vs lifecycleScope?</td><td>viewModelScope: ViewModel lifetime, auto-cancel on onCleared(). lifecycleScope: Activity/Fragment lifetime. viewModelScope for business logic, lifecycleScope for UI.</td></tr>
+<tr><td>9</td><td>WorkManager vs Service?</td><td>WorkManager: guaranteed execution, constraints, survives death. Service: long-running foreground work (music, GPS). WorkManager for most background tasks.</td></tr>
+<tr><td><span class="star">⭐</span>10</td><td>Compose stability?</td><td>@Stable/@Immutable: tell Compose to skip recomposition if unchanged. Use immutable data classes. Provide key in LazyColumn. Modifier order matters.</td></tr>
+<tr><td>11</td><td>ANR causes?</td><td>Main thread blocked &gt;5s. Causes: I/O on main, heavy computation, deadlock. Fix: withContext(IO), WorkManager, async.</td></tr>
+<tr><td>12</td><td>Repository pattern?</td><td>Single source of truth. Abstracts data sources (API/DB). UI observes local DB via Flow. API syncs to DB. Testable with fakes.</td></tr>
+<tr><td>13</td><td>Process death?</td><td>ViewModel is GONE. SavedStateHandle survives. onSaveInstanceState survives. Save small UI state (IDs, positions), not data.</td></tr>
+<tr><td><span class="star">⭐</span>14</td><td>StateFlow vs LiveData?</td><td>StateFlow: Kotlin-native, richer operators, testable with Turbine, needs lifecycle handling. LiveData: Android, auto lifecycle-aware, limited operators. Modern: StateFlow + collectAsStateWithLifecycle.</td></tr>
+<tr><td>15</td><td>popUpTo inclusive?</td><td>popUpTo("route"): pops until reaching route. inclusive=true: also pops the route. Used for login→home (clear login from stack).</td></tr>
+<tr><td>16</td><td>Application vs Network interceptor?</td><td>Application: runs once, sees original request (auth headers). Network: runs per request including redirects (caching). Token→Application, cache→Network.</td></tr>
+<tr><td>17</td><td>DataStore vs SharedPrefs?</td><td>DataStore: async (Flow+suspend), type-safe, transactional, no ANR. SharedPrefs: sync, ANR risk, not type-safe. Always prefer DataStore.</td></tr>
+<tr><td>18</td><td>Fakes vs Mocks?</td><td>Fakes: real implementations, reusable, catch contract bugs. Mocks: framework stubs, per-test. Prefer fakes for repositories.</td></tr>
+<tr><td>19</td><td>derivedStateOf when?</td><td>When computed value depends on state but is read more often than source changes. Example: isScrolledPast from scrollPosition.</td></tr>
+<tr><td><span class="star">⭐</span>20</td><td>Design a feature from scratch?</td><td>1) Define UiState sealed interface, 2) ViewModel with StateFlow, 3) Actions sealed interface, 4) Repository interface, 5) Hilt module, 6) Testing strategy.</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<div style="margin-top:80px;text-align:center;padding-top:40px;border-top:1px solid var(--border-subtle);">
+<div style="font-family:var(--font-display);font-style:italic;font-size:20px;color:var(--text-3);">Build great apps, ace the interview.</div>
+<div style="font-family:var(--font-mono);font-size:11px;color:var(--text-4);margin-top:8px;letter-spacing:.1em;">// ANDROID MASTERY · COMPLETE GUIDE ✦</div>
+</div>
+</article></div></div>
+
+<button class="back-top" id="backTop" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg></button>
+<div class="lightbox" id="lightbox"><button class="lightbox-close" id="lightboxClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg></button><img id="lightboxImg" src="" alt=""></div>
+
+<script>
+const themeBtn=document.getElementById('themeBtn'),moonIcon=document.getElementById('moonIcon'),sunIcon=document.getElementById('sunIcon'),html=document.documentElement;function applyTheme(t){html.setAttribute('data-theme',t);moonIcon.style.display=t==='dark'?'':'none';sunIcon.style.display=t==='dark'?'none':''}let initialTheme='dark';try{const s=localStorage.getItem('page-theme');if(s)initialTheme=s}catch(e){}applyTheme(initialTheme);themeBtn.addEventListener('click',()=>{const n=html.getAttribute('data-theme')==='dark'?'light':'dark';applyTheme(n);try{localStorage.setItem('page-theme',n)}catch(e){}});const sidebarToggle=document.getElementById('sidebarToggle'),sidebarShow=document.getElementById('sidebarShow'),body=document.body;function applySidebar(c){if(c)body.classList.add('sidebar-collapsed');else body.classList.remove('sidebar-collapsed')}let sidebarCollapsed=false;try{sidebarCollapsed=localStorage.getItem('page-sidebar')==='collapsed'}catch(e){}applySidebar(sidebarCollapsed);function toggleSidebar(){const n=!body.classList.contains('sidebar-collapsed');applySidebar(n);try{localStorage.setItem('page-sidebar',n?'collapsed':'open')}catch(e){}}sidebarToggle.addEventListener('click',toggleSidebar);sidebarShow.addEventListener('click',toggleSidebar);document.getElementById('printBtn').addEventListener('click',()=>window.print());const progressBar=document.querySelector('.progress-bar');function updateProgress(){const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight,p=d>0?(s/d)*100:0;progressBar.style.setProperty('--progress',p+'%')}window.addEventListener('scroll',updateProgress,{passive:true});updateProgress();const sections=document.querySelectorAll('.section,.subsection'),tocLinks=document.querySelectorAll('.toc-link');function setActive(id){tocLinks.forEach(l=>{if(l.getAttribute('href')==='#'+id)l.classList.add('active');else l.classList.remove('active')})}const observer=new IntersectionObserver(entries=>{const v=entries.filter(e=>e.isIntersecting);if(v.length>0){v.sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);setActive(v[0].target.id)}},{rootMargin:'-10% 0px -70% 0px',threshold:0});sections.forEach(s=>observer.observe(s));document.querySelectorAll('.copy-btn').forEach(btn=>{btn.addEventListener('click',async()=>{const cb=btn.closest('.code-wrap').querySelector('code');if(!cb)return;const t=cb.innerText;try{await navigator.clipboard.writeText(t)}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta)}const o=btn.innerHTML;btn.classList.add('copied');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>Copied';setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML=o},1600)})});const searchInput=document.getElementById('search'),tocItems=document.querySelectorAll('.toc>.toc-item');searchInput.addEventListener('input',e=>{const q=e.target.value.toLowerCase().trim();tocItems.forEach(item=>{const t=item.textContent.toLowerCase();if(!q||t.includes(q))item.classList.remove('hidden');else item.classList.add('hidden')})});const backTop=document.getElementById('backTop');window.addEventListener('scroll',()=>{if(window.scrollY>400)backTop.classList.add('visible');else backTop.classList.remove('visible')},{passive:true});backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));const menuBtn=document.getElementById('menuBtn'),sidebar=document.getElementById('sidebar');menuBtn.addEventListener('click',()=>sidebar.classList.toggle('open'));document.querySelectorAll('.toc-link').forEach(l=>{l.addEventListener('click',()=>{if(window.innerWidth<=768)sidebar.classList.remove('open')})});const lightbox=document.getElementById('lightbox'),lightboxImg=document.getElementById('lightboxImg'),lightboxClose=document.getElementById('lightboxClose');function openLightbox(s,a){lightboxImg.src=s;lightboxImg.alt=a||'';lightbox.classList.add('open');document.body.style.overflow='hidden'}function closeLightbox(){lightbox.classList.remove('open');document.body.style.overflow='';setTimeout(()=>{lightboxImg.src=''},200)}document.querySelectorAll('.article img').forEach(img=>{img.addEventListener('click',()=>openLightbox(img.src,img.alt))});lightbox.addEventListener('click',e=>{if(e.target===lightbox||e.target===lightboxClose)closeLightbox()});lightboxClose.addEventListener('click',closeLightbox);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox()});if(window.Prism)Prism.highlightAll();
+</script>
+</body>
+</html>
