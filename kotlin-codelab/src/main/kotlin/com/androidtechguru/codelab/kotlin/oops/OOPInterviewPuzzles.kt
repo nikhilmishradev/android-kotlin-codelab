@@ -478,14 +478,9 @@ fun puzzle12_nestedVsInner() {
     """.trimIndent())
     println("\n>>> ANSWER:")
 
-    class Outer(val x: Int) {
-        class Nested
-        inner class Inner {
-            fun getX() = x
-        }
-    }
-    val n = Outer.Nested()
-    val i = Outer(42).Inner()
+    // Nested/inner classes can't be in local classes — see PuzzleOuter at bottom of file.
+    val n = PuzzleOuter.Nested()
+    val i = PuzzleOuter(42).Inner()
     println("Nested created without outer: $n")
     println("Inner.getX() = ${i.getX()}")
 
@@ -886,5 +881,13 @@ interface FactoryDemo<T> {
 class FactoryDemoClass private constructor(val name: String) {
     companion object : FactoryDemo<FactoryDemoClass> {
         override fun create() = FactoryDemoClass("Default")
+    }
+}
+
+// Puzzle 12 — nested vs inner class
+class PuzzleOuter(val x: Int) {
+    class Nested
+    inner class Inner {
+        fun getX() = x
     }
 }
