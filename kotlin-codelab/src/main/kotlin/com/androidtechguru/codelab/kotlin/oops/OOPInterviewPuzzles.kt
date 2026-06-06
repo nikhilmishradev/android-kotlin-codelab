@@ -200,17 +200,12 @@ fun puzzle5_companionInit() {
     """.trimIndent())
     println("\n>>> ACTUAL OUTPUT:")
 
-    class MyClass {
-        init { println("Instance init") }
-        companion object {
-            init { println("Companion init") }
-            val TAG = "MyClass".also { println("TAG created") }
-        }
-    }
+    // Note: companion objects can't be in local classes, so this uses a top-level class.
+    // See CompanionDemo defined outside this function.
     println("Before access")
-    println(MyClass.TAG)
+    println(CompanionDemo.TAG)
     println("Before instance")
-    MyClass()
+    CompanionDemo()
 
     println("""
     EXPLANATION:
@@ -864,4 +859,13 @@ fun puzzle20_equalsHashCodeContract() {
     println()
 
     println("✅ OOP Interview Puzzles Complete!")
+}
+
+// ── Top-level class for Puzzle 5 (companion objects can't be in local classes) ──
+class CompanionDemo {
+    init { println("Instance init") }
+    companion object {
+        init { println("Companion init") }
+        val TAG = "MyClass".also { println("TAG created") }
+    }
 }
