@@ -21,3 +21,4 @@ dependencyResolution {
 
 rootProject.name = "AndroidKotlinCodelab"
 include(":app")
+include(":kotlin-codelab")
