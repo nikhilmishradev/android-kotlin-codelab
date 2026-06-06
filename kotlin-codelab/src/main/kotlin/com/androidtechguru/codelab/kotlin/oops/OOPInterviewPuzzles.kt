@@ -361,15 +361,8 @@ fun puzzle9_interfaceDiamondProblem() {
     """.trimIndent())
     println("\n>>> ACTUAL OUTPUT:")
 
-    interface A { fun greet() = println("A") }
-    interface B { fun greet() = println("B") }
-    class C : A, B {
-        override fun greet() {
-            super<A>.greet()
-            super<B>.greet()
-        }
-    }
-    C().greet()
+    // Interfaces can't be local — see DiamondA, DiamondB, DiamondC at bottom of file.
+    DiamondC().greet()
 
     println("""
     EXPLANATION:
@@ -534,10 +527,8 @@ fun puzzle13_valueClassEquality() {
     """.trimIndent())
     println("\n>>> ACTUAL OUTPUT:")
 
-    @JvmInline value class Email(val value: String)
-    @JvmInline value class Username(val value: String)
-
-    val e = Email("test@test.com")
+    // Value classes can't be local — see PuzzleEmail at bottom of file.
+    val e = PuzzleEmail("test@test.com")
     println(e == e)
 
     println("""
@@ -698,19 +689,12 @@ fun puzzle17_companionInheritance() {
     """.trimIndent())
     println("\n>>> ACTUAL OUTPUT:")
 
-    interface Factory<T> {
-        fun create(): T
-    }
-    class MyClass private constructor(val name: String) {
-        companion object : Factory<MyClass> {
-            override fun create() = MyClass("Default")
-        }
-    }
-    val obj = MyClass.create()
+    // Interfaces/companions can't be local — see FactoryDemo at bottom of file.
+    val obj = FactoryDemoClass.create()
     println(obj.name)
 
-    fun <T> buildObject(factory: Factory<T>): T = factory.create()
-    val obj2 = buildObject(MyClass)
+    fun <T> buildObject(factory: FactoryDemo<T>): T = factory.create()
+    val obj2 = buildObject(FactoryDemoClass)
     println(obj2.name)
 
     println("""
@@ -878,5 +862,29 @@ object CounterSingleton {
     fun increment() = ++count
 }
 
+// Puzzle 9 — diamond problem interfaces
+interface DiamondA { fun greet() = println("A") }
+interface DiamondB { fun greet() = println("B") }
+class DiamondC : DiamondA, DiamondB {
+    override fun greet() {
+        super<DiamondA>.greet()
+        super<DiamondB>.greet()
+    }
+}
+
 // Puzzle 11 — enum class
 enum class PuzzleColor { RED, GREEN, BLUE }
+
+// Puzzle 13 — value classes
+@JvmInline value class PuzzleEmail(val value: String)
+@JvmInline value class PuzzleUsername(val value: String)
+
+// Puzzle 17 — companion implementing interface
+interface FactoryDemo<T> {
+    fun create(): T
+}
+class FactoryDemoClass private constructor(val name: String) {
+    companion object : FactoryDemo<FactoryDemoClass> {
+        override fun create() = FactoryDemoClass("Default")
+    }
+}
