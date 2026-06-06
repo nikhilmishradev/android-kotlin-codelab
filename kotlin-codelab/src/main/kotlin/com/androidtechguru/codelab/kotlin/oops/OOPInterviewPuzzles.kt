@@ -242,16 +242,13 @@ fun puzzle6_objectVsClass() {
     """.trimIndent())
     println("\n>>> ACTUAL OUTPUT:")
 
-    object Counter {
-        var count = 0
-        fun increment() = ++count
-    }
-    println(Counter.increment())
-    println(Counter.increment())
-    println(Counter.increment())
+    // Named objects can't be local — see CounterSingleton at bottom of file.
+    println(CounterSingleton.increment())
+    println(CounterSingleton.increment())
+    println(CounterSingleton.increment())
 
-    val a = Counter
-    val b = Counter
+    val a = CounterSingleton
+    val b = CounterSingleton
     println(a === b)
 
     println("""
@@ -445,14 +442,14 @@ fun puzzle11_enumOrdinal() {
     """.trimIndent())
     println("\n>>> ACTUAL OUTPUT:")
 
-    enum class Color { RED, GREEN, BLUE }
-    println(Color.RED.ordinal)
-    println(Color.GREEN.ordinal)
-    println(Color.BLUE.name)
-    println(Color.valueOf("RED"))
-    println(Color.entries.size)
-    println(Color.RED == Color.RED)
-    println(Color.RED === Color.RED)
+    // Enum classes can't be local — see PuzzleColor at bottom of file.
+    println(PuzzleColor.RED.ordinal)
+    println(PuzzleColor.GREEN.ordinal)
+    println(PuzzleColor.BLUE.name)
+    println(PuzzleColor.valueOf("RED"))
+    println(PuzzleColor.entries.size)
+    println(PuzzleColor.RED == PuzzleColor.RED)
+    println(PuzzleColor.RED === PuzzleColor.RED)
 
     println("""
     EXPLANATION:
@@ -861,7 +858,12 @@ fun puzzle20_equalsHashCodeContract() {
     println("✅ OOP Interview Puzzles Complete!")
 }
 
-// ── Top-level class for Puzzle 5 (companion objects can't be in local classes) ──
+// ═══════════════════════════════════════════
+// Top-level declarations for puzzles
+// (objects, enums, companion objects can't be local)
+// ═══════════════════════════════════════════
+
+// Puzzle 5 — companion object
 class CompanionDemo {
     init { println("Instance init") }
     companion object {
@@ -869,3 +871,12 @@ class CompanionDemo {
         val TAG = "MyClass".also { println("TAG created") }
     }
 }
+
+// Puzzle 6 — named object singleton
+object CounterSingleton {
+    var count = 0
+    fun increment() = ++count
+}
+
+// Puzzle 11 — enum class
+enum class PuzzleColor { RED, GREEN, BLUE }
