@@ -62,10 +62,10 @@ fun main() {
     println("\n=== 3. Data Classes ===")
 
     // Compiler generates: equals(), hashCode(), toString(), copy(), componentN()
-    data class User(val id: Int, val name: String, val email: String)
+    data class SimpleUser(val id: Int, val name: String, val email: String)
 
-    val user1 = User(1, "Alice", "alice@test.com")
-    val user2 = User(1, "Alice", "alice@test.com")
+    val user1 = SimpleUser(1, "Alice", "alice@test.com")
+    val user2 = SimpleUser(1, "Alice", "alice@test.com")
     val user3 = user1.copy(name = "Bob")  // copy with modification
 
     println("user1: $user1")                        // auto toString()
